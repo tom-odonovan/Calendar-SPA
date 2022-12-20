@@ -49,4 +49,3 @@ Settings page:
 Backend:
 Use Node.js and Express to handle HTTP requests and serve the webpage.
 Use an SQL database to store the events and user settings.
-

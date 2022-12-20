@@ -12,7 +12,7 @@ body {
 .logo img {
     height: 50px;
     float: left;
-  }
+}
 
 .menu-toggle {
     color: #FAA31B;
@@ -49,4 +49,34 @@ footer.footer {
     position: absolute;
     bottom: 0;
     width: 100%;
+}
+
+.calendar-container {
+    width: 800px;
+    height: 600px;
+    border: 1px solid #ccc;
+}
+
+.week-header-row {
+    height: 50px;
+    text-align: center;
+    font-weight: bold;
+    background-color: #eee;
+}
+
+.hour-row {
+    height: 25px;
+}
+
+.hour-cell {
+    width: 50px;
+    text-align: right;
+    font-weight: bold;
+    vertical-align: top;
+    padding-right: 5px;
+}
+
+.day-cell {
+    width: 100px;
+    border-left: 1px solid #ccc;
 }

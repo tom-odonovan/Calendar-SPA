@@ -33,14 +33,14 @@ function renderCurrentDay() {
 
     //AM START
     const twelveAM = document.createElement('div')
-    twelveAM.classList.add('hour', `12AM`)
+    twelveAM.classList.add('hours', `12AM`)
     twelveAM.innerHTML = `<p>12AM</p>`
     daySection.append(twelveAM)
     renderHours('am')
 
     //PM START
     const midday = document.createElement('div')
-    midday.classList.add('hour', `12PM`)
+    midday.classList.add('hours', `12PM`)
     midday.innerHTML = `<p>12PM</p>`
     daySection.append(midday)
     renderHours('pm')
@@ -75,14 +75,14 @@ function renderDay(day, date, month, year){
 
     //AM START
     const twelveAM = document.createElement('div')
-    twelveAM.classList.add('hour', `12AM`)
+    twelveAM.classList.add('hours', `12AM`)
     twelveAM.innerHTML = `<p>12AM</p>`
     daySection.append(twelveAM)
     renderHours('am')
 
     //PM START
     const midday = document.createElement('div')
-    midday.classList.add('hour', `12PM`)
+    midday.classList.add('hours', `12PM`)
     midday.innerHTML = `<p>12PM</p>`
     daySection.append(midday)
     renderHours('pm')
@@ -94,7 +94,7 @@ function renderHours(prefix){
     let time = 1
     while (time < 12) {
         const hour = document.createElement('div')
-        hour.classList.add('hour', `${time}${prefix}`)
+        hour.classList.add('hours', `${time}${prefix}`)
         hour.innerHTML = `<p>${time}${prefix}</p>`
         daySection.appendChild(hour)
         time++

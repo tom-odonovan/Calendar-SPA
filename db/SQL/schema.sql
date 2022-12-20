@@ -32,7 +32,7 @@ CREATE TABLE events (
     description TEXT,
 
     FOREIGN KEY (user_id)
-        REFERENCES users(id)
+        REFERENCES users(id),
     
     FOREIGN KEY (calendar_id)
         REFERENCES calendars(id)

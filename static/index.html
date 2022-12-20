@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles.css" />
+    
     <title>Calendar</title>
 </head>
 <body>
@@ -15,12 +16,12 @@
         <button class="menu-toggle">Menu</button>
       </div>
       <nav class="navigation">
-        <button class="nav-button">Day</button>
+        <button class="nav-button" onclick="renderDaily()">Day</button>
         <button class="nav-button">Week</button>
         <button class="nav-button">Month</button>
         <!-- <button class="nav-button">Year</button> -->
       </nav>
-      <div class="content">
+      <div id="content" class="content">
         <!-- main content goes here -->
       </div>
       <footer class="footer">
@@ -29,4 +30,5 @@
         <img src="facebook-icon.png" class="social-icon"> -->
       </footer>     
 </body>
+<script defer src="./js/components/render_daily.js"></script>
 </html>

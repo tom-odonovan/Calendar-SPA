@@ -50,3 +50,44 @@ footer.footer {
     bottom: 0;
     width: 100%;
 }
+
+
+/* DAY DIV */
+#dayContainer{
+    
+    font-family: 'Jost', sans-serif;
+    color: #FAA31B;
+    
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-left: 75px;
+    margin-right: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#daySection{
+    border-color: #FAA31B;
+    border-style: solid;
+    border-radius: 5px;
+    max-height: 550px;
+    width: 95%;
+    overflow: scroll;
+}
+
+.hour{
+    border-bottom: #FAA31B 1px solid;
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 50px;
+    
+    display: flex;
+    align-items: center;
+}
+
+.dayTitle{
+    font-family: 'Jost', sans-serif;
+    margin-left: ;
+}

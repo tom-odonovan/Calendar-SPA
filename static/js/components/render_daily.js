@@ -88,6 +88,8 @@ function renderDay(day, date, month, year){
     renderHours('pm')
 }
 
+renderCurrentDay()
+
 
 
 function renderHours(prefix){

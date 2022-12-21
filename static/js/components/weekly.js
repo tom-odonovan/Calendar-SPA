@@ -40,4 +40,5 @@ for (let hour = 0; hour < 24; hour++) {
 calendarContainer.appendChild(calendarTable);
 
 // Append the calendar to the page
-document.body.appendChild(calendarContainer);
+const main = document.getElementById('content')
+main.appendChild(calendarContainer);

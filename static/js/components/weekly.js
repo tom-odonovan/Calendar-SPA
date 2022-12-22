@@ -8,7 +8,7 @@ const calendarTable = document.createElement('table');
 // Create the header row for the days of the week
 const weekHeaderRow = document.createElement('tr');
 weekHeaderRow.classList.add('week-header-row');
-const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const weekdays = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
 weekdays.forEach(weekday => {
   const headerCell = document.createElement('th');
   headerCell.textContent = weekday;

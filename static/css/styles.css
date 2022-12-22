@@ -157,13 +157,36 @@ footer.footer {
 
 
 
-
+}
 /* ---------------- DAILY ------------------ */
 
+
+.monthTitle .nav-arrows{
+    margin-left: 50px;
 }
+
 .monthTitle{
     margin-bottom: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
+
+.monthTitle button {
+    border: none;
+    width: 40px;
+    height: 40px;
+    margin: 2px;
+    border-radius: 50%;
+    background-color: #F5F5F5;
+    color: #FAA31B;
+    font-size: 20px;
+}
+.monthTitle button:hover {
+    background-color: rgba(0,0,0,0.05);
+    cursor: pointer;
+}
+
 #dayContainer{
     
     font-family: 'Jost', sans-serif;
@@ -204,3 +227,4 @@ footer.footer {
     margin-left: 30px;
     margin-top: 30px;
 }
+

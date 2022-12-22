@@ -21,6 +21,21 @@ function renderCurrentDay() {
     titleDiv.classList.add('monthTitle')
     dayContainer.append(titleDiv)
 
+    //NAV ARROWS
+    let navArrows = document.createElement('div')
+            navArrows.className = 'nav-arrows'
+            titleDiv.appendChild(navArrows)
+
+                let prevMonthBtn = document.createElement('button')
+                prevMonthBtn.id = 'prev-Month'
+                prevMonthBtn.innerText = '<'
+                navArrows.appendChild(prevMonthBtn)
+
+                let nextMonthBtn = document.createElement('button')
+                nextMonthBtn.id = 'next-Month'
+                nextMonthBtn.innerText = '>'
+                navArrows.appendChild(nextMonthBtn)
+
     //DAY CONTAINER
     const daySection = document.createElement('div')
     daySection.setAttribute('id', 'daySection')

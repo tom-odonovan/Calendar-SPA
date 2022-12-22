@@ -1,7 +1,10 @@
 
 //WHEN CURRENT DAY IS SELECTED
 function renderCurrentDay() {
-    
+    //RESET THE VIEW
+    const calendar = document.getElementById('calendar-container')
+    calendar.innerHTML = ''
+
     // Get day name from date
     let today = new Date
     let todayName = today.toLocaleDateString('default', { weekday: 'long' })
@@ -10,10 +13,10 @@ function renderCurrentDay() {
     let todayYear = today.getFullYear()
 
     //Generating parent flex div
-    const main = document.getElementById('content')
+    
     const dayContainer = document.createElement('div')
     dayContainer.setAttribute('id', 'dayContainer')
-    main.append(dayContainer)
+    calendar.append(dayContainer)
 
     //DAY CONTAINER CONTENTS
     const titleDiv = document.createElement('div')
@@ -49,16 +52,22 @@ function renderCurrentDay() {
     //AM START
     const twelveAM = document.createElement('div')
     twelveAM.classList.add('hours', `12AM`)
-    twelveAM.innerHTML = `<p>12AM</p>`
+    twelveAM.innerHTML = `<p>12am</p>`
     daySection.append(twelveAM)
     renderHours('am')
 
     //PM START
     const midday = document.createElement('div')
     midday.classList.add('hours', `12PM`)
-    midday.innerHTML = `<p>12PM</p>`
+    midday.innerHTML = `<p>12pm</p>`
     daySection.append(midday)
     renderHours('pm')
+
+    //PM END
+    const midnight = document.createElement('div')
+    midnight.classList.add('hours', `12`)
+    midnight.innerHTML = `<p>12am</p>`
+    daySection.append(midnight)
 }
 
 
@@ -103,7 +112,7 @@ function renderDay(day, date, month, year){
     renderHours('pm')
 }
 
-renderCurrentDay()
+
 
 
 

@@ -4,6 +4,7 @@ function renderMonth() {
     console.log(`Today's date = ${today}`)
 
     const calendar = document.getElementById('calendar-container')
+    calendar.innerHTML = ''
 
     // Display current month and year at top of calendar
         let monthHeading = document.createElement('h1')
@@ -74,7 +75,7 @@ function renderMonth() {
     // }
 
 }
-renderMonth();
+
 
 
 // ------------ DATE FUNCTIONS -------------

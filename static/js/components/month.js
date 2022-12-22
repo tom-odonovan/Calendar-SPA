@@ -30,7 +30,7 @@ function renderMonth() {
     // Display weekday headings for each column
         const weekdays = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
         const row1 = document.createElement('div')
-        row1.className = 'row1'
+        row1.className = 'row-0'
         calendar.appendChild(row1)
         
             weekdays.forEach((day) => {
@@ -41,8 +41,10 @@ function renderMonth() {
             })
     
     // Render square for each day in month
-        let gridIndex = 1
-        const monthObj = createDaysForMonth(today.getFullYear(), month)
+        let dayIndex = 1
+        const monthObj = createDaysForMonth(today.getFullYear(), today.getMonth())
+        console.log(monthObj)
+        
         for (let i = 1; i <= 6; i++) {
             let row = document.createElement('div')
             row.className = 'row'
@@ -52,11 +54,17 @@ function renderMonth() {
                 weekdays.forEach((day) => {
                     let dayCont = document.createElement('div')
                     dayCont.className = 'day-cont'
+                    dayCont.id = `${dayIndex}`
                     row.appendChild(dayCont)
-
-                    
+                    dayIndex++
                 })
         }
+
+    // Display correct date in each square
+
+        monthObj.forEach((day) => {
+            document.getElementById(`${day.dayOfWeek}`).innerText = day.dayOfMonth
+        })
 
     // let thisWeek = []
 
@@ -87,9 +95,9 @@ function getNumOfDaysInMonth(year, month) {
 function createDaysForMonth(year, month) {
     return [...Array(getNumOfDaysInMonth(2022, 12))].map((day, index) => {
         return {
-            date: new Date(year, month - 1, index + 1),
+            date: new Date(year, month, index + 1),
             dayOfMonth: index + 1,
-            dayOfWeek: new Date(year, month - 1, index + 1).getDay()
+            dayOfWeek: new Date(year, month, index + 1).getDay()
         }
     })
 }

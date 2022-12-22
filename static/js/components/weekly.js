@@ -1,3 +1,4 @@
+
 let today = new Date();
 
 function renderWeek() {
@@ -8,10 +9,9 @@ function renderWeek() {
   const weekEnd = new Date(today.getFullYear(), today.getMonth(), today.getDate() + (6 - today.getDay()));
 
   // Clear the calendar container
-  const calendarContainer = document.querySelector('.calendar-container');
-  if (calendarContainer) {
-    calendarContainer.innerHTML = '';
-  }
+  const calendarContainer = document.getElementById('calendar-container')
+  calendarContainer.innerHTML = ''
+
 
   // Create a table element for the calendar
   const calendarTable = document.createElement('table');
@@ -20,6 +20,7 @@ function renderWeek() {
   const weekHeaderRow = document.createElement('tr');
   weekHeaderRow.classList.add('week-header-row');
   const weekdays = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
+
   for (let day = 0; day < 7; day++) {
     const currentDay = new Date(weekStart.getFullYear(), weekStart.getMonth(), weekStart.getDate() + day);
     const headerCell = document.createElement('th');
@@ -30,6 +31,13 @@ function renderWeek() {
     headerCell.appendChild(dayNumber);
     weekHeaderRow.appendChild(headerCell);
   }
+
+  weekdays.forEach(weekday => {
+    const headerCell = document.createElement('th');
+    headerCell.textContent = weekday;
+    weekHeaderRow.appendChild(headerCell);
+  });
+
   calendarTable.appendChild(weekHeaderRow);
 
   // Create a row for each hour of the day
@@ -48,6 +56,7 @@ function renderWeek() {
       const dayCell = document.createElement('td');
       dayCell.classList.add('day-cell');
 
+
       // Only display cells for the days in the week being rendered
       const currentDay = new Date(weekStart.getFullYear(), weekStart.getMonth(), weekStart.getDate() + day);
       if (currentDay >= weekStart && currentDay <= weekEnd) {
@@ -55,11 +64,13 @@ function renderWeek() {
         // ...
       }
 
+
       hourRow.appendChild(dayCell);
     }
 
     calendarTable.appendChild(hourRow);
   }
+
 
   calendarContainer
 
@@ -109,3 +120,11 @@ function renderWeek() {
 // // Append the calendar to the page
 // const main = document.getElementById('content')
 // main.appendChild(calendarContainer);
+
+  calendarContainer.appendChild(calendarTable);
+
+  // Append the calendar to the page
+  const main = document.getElementById('content')
+  main.appendChild(calendarContainer);
+}
+

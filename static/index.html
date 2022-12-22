@@ -9,33 +9,21 @@
     <title>Calendar</title>
 </head>
 <body>
-    <header class="header">
-        <div class="logo">
-            <img src="/images/logo.png">
-        </div>
-        <!--- MENU BUTTON -->
-        <div class="menu-toggle" onclick="menuFunction(this)">
-            <div class="bar1"></div>
-            <div class="bar2"></div>
-            <div class="bar3"></div>
-        </div>
+    <header id="header" class="header">
 
-        <nav class="navigation">
-            <button class="nav-button">Day</button>
-            <button class="nav-button">Week</button>
-            <button class="nav-button">Month</button>
-            <!-- <button class="nav-button">Year</button> -->
-        </nav>
     </header>
-    <div id="home_page">
+    
+    
+    <div id="content">
+        <!-- main content goes here -->
+        <div id="calendar-container">
+            <div id="home_page">
         <h2>Welcome to</h2>
         <img class="home_image" src="/images/2023Logo.png">
         <h3>CALENDAR</h3>
 
     </div>
-    <div id="content">
-        <!-- main content goes here -->
-        <div id="calendar-container"></div>
+        </div>
     </div>
 
     <footer class="footer">
@@ -49,6 +37,8 @@
           x.classList.toggle("change");
         }
     </script>
+    <script type="module"  src="./js/initialize.js"></script> 
+    <!-- <script src="./js/components/header.js"></script>  -->
     <script src="./js/components/weekly.js"></script>  
     <!-- <script src="./js/components/render_daily.js"></script>  
     <script src="./js/components/month.js"></script>      -->

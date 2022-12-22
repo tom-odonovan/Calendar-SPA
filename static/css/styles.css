@@ -146,7 +146,7 @@ h3 {
     cursor: pointer;
 }
 
-.row1,
+.row-0,
 .row {
     display: flex;
     justify-content: center;

@@ -5,27 +5,29 @@ function renderMonth() {
 
     const calendar = document.getElementById('calendar-container')
 
+    // Display current month and year at top of calendar
         let monthHeading = document.createElement('h1')
         monthHeading.className = 'monthHeading'
         let month = today.toLocaleString('default', { month: 'long' });
         monthHeading.innerText = `${month} ${today.getFullYear()}`
         calendar.appendChild(monthHeading)
 
+        // Render navigation arrows
             let navArrows = document.createElement('div')
             navArrows.className = 'nav-arrows'
             monthHeading.appendChild(navArrows)
 
                 let prevMonthBtn = document.createElement('button')
                 prevMonthBtn.id = 'prev-month'
-                prevMonthBtn.innerText = '<'
+                prevMonthBtn.innerText = '←'
                 navArrows.appendChild(prevMonthBtn)
 
                 let nextMonthBtn = document.createElement('button')
                 nextMonthBtn.id = 'next-month'
-                nextMonthBtn.innerText = '>'
+                nextMonthBtn.innerText = '→'
                 navArrows.appendChild(nextMonthBtn)
                 
-
+    // Display weekday headings for each column
         const weekdays = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
         const row1 = document.createElement('div')
         row1.className = 'row1'
@@ -37,7 +39,10 @@ function renderMonth() {
                 dayHeading.innerText = day
                 row1.appendChild(dayHeading)
             })
-
+    
+    // Render square for each day in month
+        let gridIndex = 1
+        const monthObj = createDaysForMonth(today.getFullYear(), month)
         for (let i = 1; i <= 6; i++) {
             let row = document.createElement('div')
             row.className = 'row'
@@ -49,7 +54,7 @@ function renderMonth() {
                     dayCont.className = 'day-cont'
                     row.appendChild(dayCont)
 
-                    // const monthObj = createDaysForMonth(today.getFullYear(), month)
+                    
                 })
         }
 
@@ -77,7 +82,7 @@ renderMonth();
 function getNumOfDaysInMonth(year, month) {
     return new Date(year, month, 0).getDate();
 }
-console.log(getNumOfDaysInMonth(2022, 12));
+// console.log(getNumOfDaysInMonth(2022, 12));
 
 function createDaysForMonth(year, month) {
     return [...Array(getNumOfDaysInMonth(2022, 12))].map((day, index) => {
@@ -89,12 +94,12 @@ function createDaysForMonth(year, month) {
     })
 }
 // return Object for days in December 2022
-console.log(createDaysForMonth(2022, 9))
+// console.log(createDaysForMonth(2022, 9))
 
 // Get weekday name from date
 function getWeekday(date) {
     return today.toLocaleDateString('default', { weekday: 'long' })
 }
-console.log(getWeekday(today))
+// console.log(getWeekday(today)) 
 
-console.log(today.getMonth())
+// console.log(today.getMonth())

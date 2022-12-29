@@ -34,15 +34,21 @@ export function renderHeader(){
         }
     })
 
+
+    //LOGIN/SIGNUP MODAL 
     const modalBtn = document.getElementById('modal-btn')
     const modal = document.getElementById('modal-container')
     
-    modalBtn.addEventListener('click', e => {
+    modalBtn.addEventListener('click', (e) => {
         modal.style.display = 'block'
     })
 
-    window.addEventListener('click',  e => {
-        if(e.target == modal){modal.style.display = 'none'}
+    window.addEventListener('click',  (e) => {
+        const errors = document.getElementById('errors')
+        if(e.target == modal){
+            modal.style.display = 'none'
+            errors.innerHTML = ``
+        }
         
     })
 }

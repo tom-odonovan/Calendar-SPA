@@ -11,5 +11,17 @@ signInButton.addEventListener('click', () => {
 });
 
 
+function login() {
+    const sessionMessageElement = document.getElementById("session_message")
+    sessionMessageElement.innerText = "Logging in..."
 
+    axios.post('/api/sessions', {
+        user_name: "user",
+        password: "password",
+    }).then((response) => {
+        sessionMessageElement.innerText = "Logged in"
+    }).catch(() => {
+        sessionMessageElement.innerText = "Unable to log in"
+    })
+}
 

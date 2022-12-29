@@ -3,6 +3,7 @@
 const signUpForm = document.getElementById('signup')
 signUpForm.addEventListener('submit', function (event){
 
+    //CREATS DATA JSON USING FORM INPUTS
     event.preventDefault()
     const formData = new FormData(document.getElementById('signup'))
     console.log(event)
@@ -12,21 +13,26 @@ signUpForm.addEventListener('submit', function (event){
         password: formData.get("password")
     }
     
+    //RESETS FORM
+    document.forms['signup'].reset()
+
+    //POST DATA
+    const statusText = document.getElementById('errors')
     axios
         .post("/api/users", data)
         .then((response) => {
+            statusText.innerHTML = `<p>Success!</p>`
 
+        }).catch((status) => {
+            const statusCode = status.response['status']
 
-        }).catch((err) => {
-            const errors = document.getElementById('errors')
-            const error = err.response['status']
-            
-            if( error == 400){
-                errors.innerHTML = `
-                <h2 color='red' > All fields must be filled / Passwords must be 8 characters long</h2>`
-            }if(error == 403){
-                errors.innerHTML = `
-                <h2 color='red' > Password already in use</h2>`
+            if( statusCode == 400){
+                statusText.innerHTML = `
+                <p color='red' > Passwords must be 8 characters long</p>`
+            }
+            if(statusCode == 403){
+                statusText.innerHTML = `
+                <p color='red' > Email already in use</p>`
             }
             
 

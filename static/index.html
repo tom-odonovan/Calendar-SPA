@@ -27,11 +27,12 @@
 <div id="modal-container">
     <div class="login-container" id="container">
         <div class="form-container sign-up-container">
-            <form class="login-form" id="signup" action="#">
+            <form class="login-form" id="signup" name="signup" action="#">
                 <h1 class="login-title">Create Account</h1>
                 <input name="name" type="text" placeholder="Name" required />
                 <input name="email" type="email" placeholder="Email" required/>
                 <input name="password" type="password" placeholder="Password" required/>
+                <section id="errors"></section>
                 <button class="login-button">Sign Up</button>
             </form>
         </div>

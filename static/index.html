@@ -1,47 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles.css" />
-    
+    <link rel="stylesheet" href="/css/login-modal.css" />
+
     <title>Calendar</title>
 </head>
-<body>
-    <header id="header" class="header">
 
-    </header>
-    
-    
+<body>
+    <header id="header" class="header"></header>
     <div id="content">
         <!-- main content goes here -->
         <div id="calendar-container">
             <div id="home_page">
-        <h2>Welcome to</h2>
-        <img class="home_image" src="/images/2023Logo.png">
-        <h3>CALENDAR</h3>
-
-    </div>
+                <h2>Welcome to</h2>
+                <img class="home_image" src="/images/2023Logo.png">
+                <h3>CALENDAR</h3>
+            </div>
         </div>
     </div>
+<!-- LOGIN MODAL START -->
+<div id="modal-container">
+    <div class="login-container" id="container">
+        <div class="form-container sign-up-container">
+            <form class="login-form" id="signup" action="#">
+                <h1 class="login-title">Create Account</h1>
+                <input name="name" type="text" placeholder="Name" required />
+                <input name="email" type="email" placeholder="Email" required/>
+                <input name="password" type="password" placeholder="Password" required/>
+                <button class="login-button">Sign Up</button>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <form class="login-form" id="login"action="#">
+                <h1 class="login-title">Sign in</h1>
+                <input type="email" placeholder="Email" required/>
+                <input type="password" placeholder="Password" required/>
+                <button class="login-button">Sign In</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1 class="login-title" >Welcome Back!</h1>
+                    <p class="login-desc">Already have a account?</p>
+                    <button class="login-button outlined" id="signIn">Sign In</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1 class="login-title" >Hello, Friend!</h1>
+                    <p class="login-desc">Lets get you organised!</p>
+                    <button class="login-button outlined" id="signUp">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- LOGIN MODAL END -->
+
 
     <footer class="footer">
         <p class="copyright">Copyright 2022</p>
         <!-- <img src="instagram-icon.png" class="social-icon">
         <img src="facebook-icon.png" class="social-icon"> -->
-    </footer>  
+    </footer>
     <!--- MENU BUTTON FUNCTION -->
     <script>
         function menuFunction(x) {
-          x.classList.toggle("change");
+            x.classList.toggle("change");
         }
     </script>
-    <script type="module"  src="./js/initialize.js"></script> 
+    <script type="module" src="./js/initialize.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- <script src="./js/components/header.js"></script>  -->
-    <script src="./js/components/weekly.js"></script>  
-    <script src="./js/components/render_daily.js"></script>  
-    <script src="./js/components/month.js"></script>     
+    <script src="./js/components/weekly.js"></script>
+    <script src="./js/components/render_daily.js"></script>
+    <script src="./js/components/month.js"></script>
+    <script src="./js/components/login.js"></script>
+    <script src="./js/components/add-user.js"></script>
 </body>
 <!-- <script defer src="./js/components/render_daily.js"></script> -->
+
 </html>

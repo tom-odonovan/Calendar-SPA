@@ -9,10 +9,10 @@ router.route('/')
         const { name, email, password } = req.body
         const sqlGet = `SELECT * FROM users`;
 
-        const sql = `INSERT INTO users (name, email, password) VALUES($1, $2, $3)`;
+        const sql = `INSERT INTO users (name, email, password_hash) VALUES($1, $2, $3)`;
         db.query(sql, [name, email, password]).then((dbRes) => {
     
-            res.json({ success: true })
+            res.status(200).json({ success: true })
         })
 
         

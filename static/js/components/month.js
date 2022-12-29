@@ -1,6 +1,7 @@
-let today = new Date
+
 
 function renderMonth() {
+    let today = new Date
     console.log(`Today's date = ${today}`)
 
     const calendar = document.getElementById('calendar-container')

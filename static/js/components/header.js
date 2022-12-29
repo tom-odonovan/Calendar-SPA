@@ -13,6 +13,7 @@ export function renderHeader(){
     </div>
 
     <nav id="navigation" class="navigation">
+        <button id='modal-btn' class="nav-button">Sign In</button>
         <button id='nav-button' class="nav-button">Day</button>
         <button id='nav-button' class="nav-button">Week</button>
         <button id='nav-button' class="nav-button">Month</button>
@@ -32,5 +33,18 @@ export function renderHeader(){
             renderCurrentDay()
         }
     })
+
+    const modalBtn = document.getElementById('modal-btn')
+    const modal = document.getElementById('modal-container')
+    
+    modalBtn.addEventListener('click', e => {
+        modal.style.display = 'block'
+    })
+
+    window.addEventListener('click',  e => {
+        if(e.target == modal){modal.style.display = 'none'}
+        
+    })
 }
+
 

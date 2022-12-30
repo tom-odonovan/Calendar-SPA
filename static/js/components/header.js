@@ -1,36 +1,77 @@
 export function renderHeader(){
-        const header = document.getElementById('header')
-        
-        header.innerHTML = `
-    <div class="logo">
-        <img src="/images/logo.png">
-    </div>
-    <!--- MENU BUTTON -->
-    <div class="menu-toggle" onclick="menuFunction(this)">
-        <div class="bar1"></div>
-        <div class="bar2"></div>
-        <div class="bar3"></div>
-    </div>
+    const header = document.getElementById('header')
+    header.innerHTML = ''
 
-    <nav id="navigation" class="navigation">
-        <button id='nav-button' class="nav-button">Day</button>
-        <button id='nav-button' class="nav-button">Week</button>
-        <button id='nav-button' class="nav-button">Month</button>
-        <!-- <button class="nav-button">Year</button> -->
-    </nav>
+    // Render logo
+    const logoContainer = document.createElement('div')
+    logoContainer.className = 'logo'
+    header.appendChild(logoContainer)
+    const logo = document.createElement('img')
+    logo.setAttribute('src', '/images/logo.png')
+    logoContainer.appendChild(logo)
+
+    // Render dropdown menu
+    const menuContainer = document.createElement('div')
+    menuContainer.className = 'menu-container'
+    header.appendChild(menuContainer)
+
+    const menuButton = document.createElement('div')
+    menuButton.id = 'menu-button'
+    menuButton.classList.add('menu-toggle')
+    menuContainer.appendChild(menuButton)
+
+    const menu = document.createElement('div')
+    menu.className = 'dropdown-menu hidden'
+    menuContainer.appendChild(menu)
+
+    menu.innerHTML = `
+        <a href='#'>CALENDAR</>
+        <a href='#'>PROFILE</>
+        <a href='#'>ABOUT</>
+        <a href='#'>CONTACT</>
+        <a href='#'>LOGOUT</>
     `
-    const navButtons = document.getElementById('navigation')
+
+    for (let i = 1; i <= 3; i++) {
+        let bar = document.createElement('div')
+        bar.className = `bar${i}`
+        menuButton.appendChild(bar)
+    }
+
+    // Render nav buttons
+    const navButtons = document.createElement('nav')
+    navButtons.id = 'navigation'
+    navButtons.className = 'navigation'
+    let viewNames = ['DAY', 'WEEK', 'MONTH']
+    for (let name of viewNames) {
+        let navButton = document.createElement('button')
+        navButton.className = 'nav-button'
+        navButton.innerHTML = name
+        navButtons.appendChild(navButton)
+    }
+    header.appendChild(navButtons)
+
+    // Alow user to change view using nav buttons 
     navButtons.addEventListener('click', (e) => {
         const button = e.target.innerHTML
-        if(button === 'Month'){
-            renderMonth()
+        if (button === 'MONTH') {
+            renderMonth(0)
         }
-        if(button === 'Week'){
+        if (button === 'WEEK') {
             renderWeek()
         }
-        if(button === 'Day'){
-            renderCurrentDay()
+        if (button === 'DAY') {
+            renderCurrentDay(0)
         }
     })
-}
 
+    // Render dropdown menu when user clicks menu button
+    menuButton.addEventListener('click', () => {
+        menuButton.classList.toggle('change')
+        menu.classList.toggle('hidden')
+        menu.classList.toggle('active')
+        
+    })
+
+
+}

@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
 
 body {
     background-color: #F5F5F5;
@@ -27,14 +28,18 @@ body {
 }
 
 .nav-button {
-    color: #FAA31B;
+    color: #545454;
     display: inline-block;
     border: none;
     background-color: transparent;
 }
 
 .nav-button:hover {
-    color: #545454;
+    color: #FAA31B;
+    cursor: pointer;
+}
+.nav-button:focus {
+    color: #FAA31B;
 }
 
 .content {
@@ -75,12 +80,14 @@ h3 {
 }
 
 /* ---------------- MENU BUTTON ------------------ */
-.menu-toggle {
+.menu-container {
     float: left;
-    cursor: pointer;
     position: absolute;
     top: 37px;
     left: 115px;
+}
+.menu-toggle {
+    cursor: pointer;
 }
 
 .menu-toggle:hover {
@@ -107,12 +114,31 @@ h3 {
     opacity: 0;
     color: #545454;
 }
-
 .change .bar3 {
     transform: translate(0, -7px) rotate(45deg);
     color: #545454;
 }
-
+.dropdown-menu {
+    padding: 20px 0;
+    border-radius: 15px;
+    background-color: #FAA31B;
+}
+.hidden {
+    visibility: hidden;
+}
+.active {
+    visibility: visible;
+}
+.dropdown-menu a {
+    display: block;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+    padding: 10px 40px;
+}
+.dropdown-menu a:hover {
+    background-color: #f9b03b;
+}
 
 /* ---------------- MONTH ------------------ */
 
@@ -162,12 +188,22 @@ h3 {
 }
 
 .day-cont {
+    display: flex;
+    justify-content: right;
     width: 150px;
     height: 120px;
     border: 1px solid #FAA31B;
+    background-color: #F5F5F5;
     text-align: center;
     line-height: 70px;
     margin: 2px;
+}
+.day-cont .date-marker {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 50%;
+    margin: 5px;
 }
 
 

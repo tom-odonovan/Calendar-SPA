@@ -11,6 +11,7 @@ signInButton.addEventListener('click', () => {
 	container.classList.remove("right-panel-active");
 });
 
+
 //LOGIN BACKEND
 
 const logInForm = document.getElementById('login')

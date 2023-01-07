@@ -2,13 +2,13 @@ const express = require("express")
 const db = require('../db/db')
 const router = express.Router()
 
-// function checkLoggedIn(req, res, next) {
-//     if (!req.session.userName) {
-//         return res.status(401).json({ message: "Not logged in"})
-//     }
+function checkLoggedIn(req, res, next) {
+    if (!req.session.userName) {
+        return res.status(401).json({ message: "Not logged in"})
+    }
 
-//     next()
-// }
+    next()
+}
 
 router.route('/')
     .get((req, res) => {
@@ -35,10 +35,11 @@ router.route('/')
             req.session.email = email
             req.session.name = userData['name']
             res.status(200).json({ message: "Logged in" })
-            
-
         })
-
+    })
+    .delete(checkLoggedIn, (req, res) => {
+        req.session.destroy()
+        res.json({ message: "Logged out" })
     })
 
 // .delete("/api/sessions", checkLoggedIn, (req, res) => {

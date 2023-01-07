@@ -74,6 +74,10 @@ h3 {
 }
 
 /* ---------------- MAIN CONTENT ------------------ */
+#content {
+    position: relative;
+}
+
 #content #calendar-container {
     width: 1300px;
     margin: 0 auto;
@@ -206,7 +210,6 @@ h3 {
     margin: 5px;
 }
 
-
 /* ---------------- FOOTER ------------------ */
 
 footer.footer {
@@ -226,64 +229,146 @@ footer.footer {
     color: #FAA31B;
 }
 
-
-
 /* ---------------- WEEKLY ------------------ */
 
-table {
+.weekHeading {
+    text-align: center;
     color: #FAA31B;
-    border: 1px;
-    border-color: #FAA31B;
-    border-style: solid;
+    height: 52px;
+}
+
+.div-header {
     display: flex;
-    justify-content: start;
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
+}
+
+.nav-arrows {
+    float: right;
+    right: 45px;
+    height: 50px;
+}
+
+.nav-arrows button {
+    border: none;
+    width: 40px;
+    height: 40px;
+    margin: 2px;
+    border-radius: 50%;
+    background-color: #F5F5F5;
+    color: #FAA31B;
+    font-size: 20px;
+}
+
+.nav-arrows button:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+}
+
+#content #calendar-container {
+    color: #FAA31B;
+    display: flex;
     flex-direction: column;
-    max-height: 100%;
-    width: 110%;
-    overflow-y: auto;
-    overflow-x:hidden;
-}
-
-.calendar-container {
-    margin: 50px auto;
-    width: 800px;
-    height: 800px;
-}
-
-th {
-    font-family: 'Jost', sans-serif;
-    font-weight: 300;
-    padding-right: 10px;
-    padding-left: 35px;
 }
 
 .week-header-row {
+    display: flex;
     text-align: center;
     background-color: #F5F5F5;
+    margin-left: 140px;
+    margin-right: 112px;
 }
 
+.header-cell {
+    flex: none;
+    text-align: center;
+    font-weight: bold;
+    padding: 0.5em;
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    width: 134px;
+  }
+
+.header-cell-first {
+    flex: none;
+    width: 64px;
+}
+
+.div-header-row {
+    display: flex;
+}
+  
+.day-number {
+    font-size: 0.8em;
+    color: #FAA31B;
+  }
+
 .hour-row {
-    height: 80px;
+    display: flex;
+    height: 120px;
+    width: auto;
     border-top: 1px solid #FAA31B;
+    margin-left: 140px;
+    margin-right: 120px;
+}
+
+.hour-row-first {
+    display: flex;
+    height: 120px;
+    width: auto;
+    border-top: 1px solid #FAA31B;
+    margin-left: 140px;
+    margin-right: 120px;
+}
+
+.hour-row-last {
+    display: flex;
+    height: 120px;
+    width: auto;
+    border-top: 1px solid #FAA31B;
+    border-bottom: 1px solid #FAA31B;
+    margin-left: 140px;
+    margin-right: 120px;
 }
 
 .hour-cell {
     font-family: 'Jost', sans-serif;
     font-weight: 300;
-    width: 50px;
-    height: 80px;
+    width: 55px;
+    height: 120px;
     text-align: right;
     vertical-align: top;
-    padding-right: 5px;
+    padding-top: 8px;
+    padding-right: 8px;
+    border-left: 1px solid #FAA31B;
 }
 
 .day-cell {
-    width: 100px;
+    display: flex;
+    flex: 1;
+    width: 150px;
+    height: 120px;
     border-left: 1px solid #FAA31B;
 
 }
 
+.day-cell-last {
+    display: flex;
+    flex: 1;
+    width: 150px;
+    height: 120px;
+    border-left: 1px solid #FAA31B;
+    border-right: 1px solid #FAA31B;
+}
+
+/** --- scrollable --- */
+
+.div-weekly-scrollable {
+    margin:auto;
+    max-height: 400px; 
+    overflow: auto;
+}
 
 /* ---------------- DAILY ------------------ */
 
@@ -364,4 +449,26 @@ th {
     font-weight: 300;
     margin-left: 30px;
     margin-top: 30px;
+}
+
+/* This is for the pop up */
+.day-cell-mouse-hover {
+    border: 2px solid #FAA31B;
+}
+
+/* EVENT FORM */
+.event-form {
+    background-color: gray;
+    height: 400px;
+    width: 600px;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    margin: auto;    
+}
+
+.event-form-hidden {
+    display:none;
 }

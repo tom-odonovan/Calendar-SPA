@@ -72,6 +72,4 @@ export function renderHeader(){
         menu.classList.toggle('active')
         
     })
-
-
 }

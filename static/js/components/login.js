@@ -1,3 +1,4 @@
+//MODAL CONTROL - FRONT END
 const signUpButton = document.getElementById('signUp');
 const signInButton = document.getElementById('signIn');
 const container = document.getElementById('container');
@@ -10,18 +11,43 @@ signInButton.addEventListener('click', () => {
 	container.classList.remove("right-panel-active");
 });
 
+//LOGIN BACKEND
 
-function login() {
-    const sessionMessageElement = document.getElementById("session_message")
-    sessionMessageElement.innerText = "Logging in..."
+const logInForm = document.getElementById('login')
 
-    axios.post('/api/sessions', {
-        user_name: "user",
-        password: "password",
-    }).then((response) => {
-        sessionMessageElement.innerText = "Logged in"
-    }).catch(() => {
-        sessionMessageElement.innerText = "Unable to log in"
-    })
-}
+logInForm.addEventListener('submit', function (event){
+
+    event.preventDefault()
+    const formData = new FormData(document.getElementById('login'))
+    console.log(event)
+    const data = {
+        email: formData.get("email"),
+        password_hash: formData.get("password")
+    }
+    console.log(data)
+    document.forms['login'].reset()
+
+    const loginErrors = document.getElementById("login-errors")
+    loginErrors.innerText = "Logging in..."
+
+    axios
+        .post('/api/sessions', data)
+        .then((response) => {
+            loginErrors.innerText = "Logged in"
+        }).catch((status) => {
+            const statusCode = status.response['status']
+            
+            if(statusCode === 404){
+                loginErrors.innerText = "Youll need to signup"
+            }
+            if(statusCode === 401){
+                loginErrors.innerText = "Incorrect Password"
+            }
+            
+        })
+})
+
+
+
+
 

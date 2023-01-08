@@ -28,10 +28,12 @@ body {
 }
 
 .nav-button {
-    color: #545454;
+    color: #727272;
     display: inline-block;
     border: none;
     background-color: transparent;
+    font-size: 16px;
+    padding: 0 15px;
 }
 
 .nav-button:hover {
@@ -87,6 +89,7 @@ h3 {
     left: 115px;
 }
 .menu-toggle {
+    width: fit-content;
     cursor: pointer;
 }
 
@@ -140,7 +143,7 @@ h3 {
     background-color: #f9b03b;
 }
 
-/* ---------------- MONTH ------------------ */
+/* ---------------- MONTHLY ------------------ */
 
 .monthHeading {
     text-align: center;
@@ -154,6 +157,7 @@ h3 {
     position: relative;
     right: 450px;
     bottom: 5px;
+    
 }
 
 .monthHeading button {
@@ -197,6 +201,7 @@ h3 {
     text-align: center;
     line-height: 70px;
     margin: 2px;
+    z-index: -1;
 }
 .day-cont .date-marker {
     width: 30px;

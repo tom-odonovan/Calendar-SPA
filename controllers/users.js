@@ -1,6 +1,12 @@
 const express = require("express")
 const db = require('../db/db')
 const router = express.Router()
+const bcrypt = require('bcrypt')
+
+//PASSWORD HASHING
+function generateHash(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null)
+}
 
 router.route('/')
 
@@ -41,8 +47,9 @@ router.route('/')
             }
             //IF SIGNUP IS NEW USER DATA INSERT INTO USERS TABLE
             else {
+                const password_hash = generateHash(password)
                 const sql = `INSERT INTO users (name, email, password_hash) VALUES($1, $2, $3)`;
-                db.query(sql, [name, email, password]).then((dbRes) => {
+                db.query(sql, [name, email, password_hash]).then((dbRes) => {
                     
                     res.status(200).json({ success: true })
                 })

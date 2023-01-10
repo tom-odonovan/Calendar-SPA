@@ -1,5 +1,6 @@
+import { renderEventsThisMonth } from './renderEvents.js'
 
-function renderMonth(m) {
+export function renderMonth(m) {
     const today = new Date()
     console.log(`Today's date = ${today}`)
     
@@ -130,7 +131,12 @@ function renderMonth(m) {
                 date.innerText = nextMonthDays[i].dayOfMonth
                 tile.appendChild(date)
             }
+
+       
 }
+
+// Render events in current month from database
+renderEventsThisMonth()
 
 
 

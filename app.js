@@ -23,7 +23,7 @@ app.use(expressSession({
         pool: db,
         createTableIfMissing: true,
     }),
-    secret: process.env.SECRET,
+    secret: process.env.SECRET_APP_KEY,
     saveUninitialized:true,
     // cookie: { secure: true},
     resave: false 

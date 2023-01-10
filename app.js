@@ -1,6 +1,7 @@
 require("dotenv").config()
 const express = require("express")
 const expressSession = require("express-session")
+const cookieParser = require("cookie-parser")
 const usersRouter = require("./controllers/users")
 const sessionsRouter = require("./controllers/sessions")
 const eventsRouter = require("./controllers/events")
@@ -16,13 +17,16 @@ const PORT = 3000;
 
 app.use(bodyParser.json())
 app.use('/', express.static('static'))
+app.use(cookieParser())
 app.use(expressSession({
     store: new pgSession({
         pool: db,
         createTableIfMissing: true,
     }),
     secret: process.env.SECRET,
-    
+    saveUninitialized:true,
+    // cookie: { secure: true},
+    resave: false 
 }))
 
 app.use("/api/events", eventsRouter)

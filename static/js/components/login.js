@@ -15,7 +15,6 @@ signInButton.addEventListener('click', () => {
 //LOGIN BACKEND
 
 const logInForm = document.getElementById('login')
-
 logInForm.addEventListener('submit', function (event){
 
     event.preventDefault()

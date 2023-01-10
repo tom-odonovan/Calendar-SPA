@@ -1,10 +1,9 @@
-<<<<<<< HEAD
+
 import { renderEventsThisMonth } from './renderEvents.js'
 
 export function renderMonth(m) {
-=======
-function renderMonth(m) {
->>>>>>> main
+
+
     const today = new Date()
     
     console.log(`Today's date = ${today}`)

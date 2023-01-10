@@ -1,3 +1,6 @@
+import { renderMonth } from './month.js'
+import { renderWeek } from './weekly.js'
+import { renderCurrentDay } from './render_daily.js'
 
 export function renderHeader(){
 
@@ -89,4 +92,3 @@ export function renderHeader(){
         
     })
 }
-

@@ -1,6 +1,6 @@
 
 //WHEN CURRENT DAY IS SELECTED
-function renderCurrentDay(d) {
+export function renderCurrentDay(d) {
     //RESET THE VIEW
     const calendar = document.getElementById('calendar-container')
     calendar.innerHTML = ''

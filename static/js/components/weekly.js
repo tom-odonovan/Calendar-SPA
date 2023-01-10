@@ -1,6 +1,6 @@
 let today = new Date();
 
-function renderWeek() {
+export function renderWeek() {
   console.log(`Today's date = ${today}`);
     // Clear the calendar container
     const calendarContainer = document.getElementById('calendar-container')
@@ -195,4 +195,3 @@ function hideEventForm() {
   const divForm = document.getElementById('event-form-id'); 
   divForm.classList.add('event-form-hidden');
 }
-

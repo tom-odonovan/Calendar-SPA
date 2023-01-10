@@ -1,6 +1,6 @@
-
 function renderMonth(m) {
     const today = new Date()
+    
     console.log(`Today's date = ${today}`)
     
     // Argument 'm' dicatates the reference to current month 

@@ -3,6 +3,7 @@ import { renderWeek } from './weekly.js'
 import { renderCurrentDay } from './render_daily.js'
 
 export function renderHeader(){
+
     const header = document.getElementById('header')
     header.innerHTML = ''
 
@@ -46,7 +47,7 @@ export function renderHeader(){
     const navButtons = document.createElement('nav')
     navButtons.id = 'navigation'
     navButtons.className = 'navigation'
-    let viewNames = ['DAY', 'WEEK', 'MONTH']
+    let viewNames = ['SIGN IN', 'DAY', 'WEEK', 'MONTH']
     for (let name of viewNames) {
         let navButton = document.createElement('button')
         navButton.className = 'nav-button'
@@ -58,6 +59,10 @@ export function renderHeader(){
     // Alow user to change view using nav buttons 
     navButtons.addEventListener('click', (e) => {
         const button = e.target.innerHTML
+        if (button === 'SIGN IN') {
+            const modal = document.getElementById('modal-container')
+            modal.style.display = 'block'
+        }
         if (button === 'MONTH') {
             renderMonth(0)
         }
@@ -67,6 +72,16 @@ export function renderHeader(){
         if (button === 'DAY') {
             renderCurrentDay(0)
         }
+    })
+
+    //LOGIN/SIGNUP MODAL 
+    window.addEventListener('click',  (e) => {
+        const errors = document.getElementById('errors')
+        if(e.target == modal){
+            modal.style.display = 'none'
+            errors.innerHTML = ``
+        }
+        
     })
 
     // Render dropdown menu when user clicks menu button

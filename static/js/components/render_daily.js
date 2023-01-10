@@ -1,12 +1,16 @@
 
 //WHEN CURRENT DAY IS SELECTED
-function renderCurrentDay() {
+function renderCurrentDay(d) {
     //RESET THE VIEW
     const calendar = document.getElementById('calendar-container')
     calendar.innerHTML = ''
 
-    // Get day name from date
     let today = new Date
+    
+    // Argument 'd' dicatates the reference to current day 
+    today.setDate(today.getDate() + d, 1)
+
+    // Get day name from date
     let todayName = today.toLocaleDateString('default', { weekday: 'long' })
     let todayDate = today.getDate()
     let todayMonth = today.toLocaleDateString('default', { month: 'long' })
@@ -31,13 +35,21 @@ function renderCurrentDay() {
 
                 let prevMonthBtn = document.createElement('button')
                 prevMonthBtn.id = 'prev-Month'
-                prevMonthBtn.innerText = '<'
+                prevMonthBtn.innerText = '←'
                 navArrows.appendChild(prevMonthBtn)
 
                 let nextMonthBtn = document.createElement('button')
                 nextMonthBtn.id = 'next-Month'
-                nextMonthBtn.innerText = '>'
+                nextMonthBtn.innerText = '→'
                 navArrows.appendChild(nextMonthBtn)
+
+    // Allow user to toggle between months using nav arrows
+    prevMonthBtn.addEventListener('click', () => {
+        renderCurrentDay(d - 1)
+    })
+    nextMonthBtn.addEventListener('click', () => {
+        renderCurrentDay(d + 1)
+    })
 
     //DAY CONTAINER
     const daySection = document.createElement('div')

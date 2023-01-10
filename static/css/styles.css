@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
 
 * {
 	box-sizing: border-box;
@@ -32,14 +33,20 @@ body {
 }
 
 .nav-button {
-    color: #FAA31B;
+    color: #727272;
     display: inline-block;
     border: none;
     background-color: transparent;
+    font-size: 16px;
+    padding: 0 15px;
 }
 
 .nav-button:hover {
-    color: #545454;
+    color: #FAA31B;
+    cursor: pointer;
+}
+.nav-button:focus {
+    color: #FAA31B;
 }
 
 .content {
@@ -74,18 +81,25 @@ h3 {
 }
 
 /* ---------------- MAIN CONTENT ------------------ */
+#content {
+    position: relative;
+}
+
 #content #calendar-container {
     width: 1300px;
     margin: 0 auto;
 }
 
 /* ---------------- MENU BUTTON ------------------ */
-.menu-toggle {
+.menu-container {
     float: left;
-    cursor: pointer;
     position: absolute;
     top: 37px;
     left: 115px;
+}
+.menu-toggle {
+    width: fit-content;
+    cursor: pointer;
 }
 
 .menu-toggle:hover {
@@ -112,14 +126,33 @@ h3 {
     opacity: 0;
     color: #545454;
 }
-
 .change .bar3 {
     transform: translate(0, -7px) rotate(45deg);
     color: #545454;
 }
+.dropdown-menu {
+    padding: 20px 0;
+    border-radius: 15px;
+    background-color: #FAA31B;
+}
+.hidden {
+    visibility: hidden;
+}
+.active {
+    visibility: visible;
+}
+.dropdown-menu a {
+    display: block;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+    padding: 10px 40px;
+}
+.dropdown-menu a:hover {
+    background-color: #f9b03b;
+}
 
-
-/* ---------------- MONTH ------------------ */
+/* ---------------- MONTHLY ------------------ */
 
 .monthHeading {
     text-align: center;
@@ -133,6 +166,7 @@ h3 {
     position: relative;
     right: 450px;
     bottom: 5px;
+    
 }
 
 .monthHeading button {
@@ -167,14 +201,24 @@ h3 {
 }
 
 .day-cont {
+    display: flex;
+    justify-content: right;
     width: 150px;
     height: 120px;
     border: 1px solid #FAA31B;
+    background-color: #F5F5F5;
     text-align: center;
     line-height: 70px;
     margin: 2px;
+    z-index: -1;
 }
-
+.day-cont .date-marker {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 50%;
+    margin: 5px;
+}
 
 /* ---------------- FOOTER ------------------ */
 
@@ -195,64 +239,146 @@ footer.footer {
     color: #FAA31B;
 }
 
-
-
 /* ---------------- WEEKLY ------------------ */
 
-table {
+.weekHeading {
+    text-align: center;
     color: #FAA31B;
-    border: 1px;
-    border-color: #FAA31B;
-    border-style: solid;
+    height: 52px;
+}
+
+.div-header {
     display: flex;
-    justify-content: start;
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
+}
+
+.nav-arrows {
+    float: right;
+    right: 45px;
+    height: 50px;
+}
+
+.nav-arrows button {
+    border: none;
+    width: 40px;
+    height: 40px;
+    margin: 2px;
+    border-radius: 50%;
+    background-color: #F5F5F5;
+    color: #FAA31B;
+    font-size: 20px;
+}
+
+.nav-arrows button:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+}
+
+#content #calendar-container {
+    color: #FAA31B;
+    display: flex;
     flex-direction: column;
-    max-height: 100%;
-    width: 110%;
-    overflow-y: auto;
-    overflow-x:hidden;
-}
-
-.calendar-container {
-    margin: 50px auto;
-    width: 800px;
-    height: 800px;
-}
-
-th {
-    font-family: 'Jost', sans-serif;
-    font-weight: 300;
-    padding-right: 10px;
-    padding-left: 35px;
 }
 
 .week-header-row {
+    display: flex;
     text-align: center;
     background-color: #F5F5F5;
+    margin-left: 140px;
+    margin-right: 112px;
 }
 
+.header-cell {
+    flex: none;
+    text-align: center;
+    font-weight: bold;
+    padding: 0.5em;
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    width: 134px;
+  }
+
+.header-cell-first {
+    flex: none;
+    width: 64px;
+}
+
+.div-header-row {
+    display: flex;
+}
+  
+.day-number {
+    font-size: 0.8em;
+    color: #FAA31B;
+  }
+
 .hour-row {
-    height: 80px;
+    display: flex;
+    height: 120px;
+    width: auto;
     border-top: 1px solid #FAA31B;
+    margin-left: 140px;
+    margin-right: 120px;
+}
+
+.hour-row-first {
+    display: flex;
+    height: 120px;
+    width: auto;
+    border-top: 1px solid #FAA31B;
+    margin-left: 140px;
+    margin-right: 120px;
+}
+
+.hour-row-last {
+    display: flex;
+    height: 120px;
+    width: auto;
+    border-top: 1px solid #FAA31B;
+    border-bottom: 1px solid #FAA31B;
+    margin-left: 140px;
+    margin-right: 120px;
 }
 
 .hour-cell {
     font-family: 'Jost', sans-serif;
     font-weight: 300;
-    width: 50px;
-    height: 80px;
+    width: 55px;
+    height: 120px;
     text-align: right;
     vertical-align: top;
-    padding-right: 5px;
+    padding-top: 8px;
+    padding-right: 8px;
+    border-left: 1px solid #FAA31B;
 }
 
 .day-cell {
-    width: 100px;
+    display: flex;
+    flex: 1;
+    width: 150px;
+    height: 120px;
     border-left: 1px solid #FAA31B;
 
 }
 
+.day-cell-last {
+    display: flex;
+    flex: 1;
+    width: 150px;
+    height: 120px;
+    border-left: 1px solid #FAA31B;
+    border-right: 1px solid #FAA31B;
+}
+
+/** --- scrollable --- */
+
+.div-weekly-scrollable {
+    margin:auto;
+    max-height: 400px; 
+    overflow: auto;
+}
 
 /* ---------------- DAILY ------------------ */
 
@@ -333,4 +459,26 @@ th {
     font-weight: 300;
     margin-left: 30px;
     margin-top: 30px;
+}
+
+/* This is for the pop up */
+.day-cell-mouse-hover {
+    border: 2px solid #FAA31B;
+}
+
+/* EVENT FORM */
+.event-form {
+    background-color: gray;
+    height: 400px;
+    width: 600px;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    margin: auto;    
+}
+
+.event-form-hidden {
+    display:none;
 }

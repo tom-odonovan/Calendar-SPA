@@ -204,14 +204,29 @@ h3 {
     display: flex;
     justify-content: right;
     width: 150px;
-    height: 120px;
+    height: 130px;
     border: 1px solid #FAA31B;
     background-color: #F5F5F5;
     text-align: center;
     line-height: 70px;
     margin: 2px;
-    z-index: -1;
+    z-index: 2;
+    transition: 80ms ease-out;
+    
 }
+
+.day-cont:hover {
+    border: 2px solid #FAA31B;
+    transform: scale(1.01);
+    box-shadow: 0 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.day-cont:active {
+    transform: scale(0.99);
+    opacity: 0.6;
+}
+
 .day-cont .date-marker {
     width: 30px;
     height: 30px;
@@ -481,4 +496,46 @@ footer.footer {
 
 .event-form-hidden {
     display:none;
+}
+
+
+/* ---------------- EVENT CONTAINER ------------------ */
+
+.eventCont{
+    border: none;
+    background-color: #F5F5F5;
+    position: relative;
+    left: -105px;
+    top: 5px;
+    width: 130px;
+    height: 30px;
+    line-height: 20px;
+    text-align: left;
+    border-radius: 5px;
+    color: #FAA31B;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0 5px;
+    margin-bottom: 5px;
+    transition: 100ms ease-out;
+}
+.eventCont::before {
+    content: "•";
+    color: #5BC8AF;
+    font-size: 1.7em;
+    padding-right: 5px;
+    position: relative;
+    top: 3px;
+}
+.eventCont:focus {
+    opacity: 1;
+    color: white;
+    background-color: #FAA31B;
+    opacity: 0.8;    
+}
+
+.eventCont:focus::before {
+    color: white;
 }

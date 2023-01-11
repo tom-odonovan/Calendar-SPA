@@ -13,7 +13,10 @@ function checkLoggedIn(req, res, next) {
 router.route('/')
     .get((req, res) => {
 
-        res.json({email: req.session.email})
+        res.json({
+            user_id: req.session.user_id,
+            email: req.session.email
+        })
 
     })
     .post((req, res) => {
@@ -37,6 +40,7 @@ router.route('/')
             } 
             //SET SESSION DETAILS
             req.session.email = email
+            req.session.user_id = userData[0]['id']
             req.session.name = userData[0]['name']
             res.status(200).json({ message: "Logged in" })
             // console.log(req.session)

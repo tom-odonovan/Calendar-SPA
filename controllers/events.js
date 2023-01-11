@@ -47,10 +47,10 @@ router.route('/')
 
 //SPECIFIC EVENTS
 router.route('/:id')
-    // Get specific event 
+    // Get event by User Id
     .get((req, res) => {
-        const id = req.params.date
-        const sql = 'SELECT * FROM events WHERE id=$1'
+        const id = req.params.id
+        const sql = 'SELECT * FROM events WHERE user_id=$1 ORDER BY start_time' // <--- Ensures events are rendered in Chron. order
         db.query(sql, [id]).then((dbResult) => {
             const { rows, command, columns } = dbResult
             if (rows) {

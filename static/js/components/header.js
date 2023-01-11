@@ -77,6 +77,7 @@ export function renderHeader(email, session){
     //LOGIN/SIGNUP MODAL 
     window.addEventListener('click',  (e) => {
         const errors = document.getElementById('errors')
+        const modal = document.getElementById('modal-container')
         if(e.target == modal){
             modal.style.display = 'none'
             errors.innerHTML = ``

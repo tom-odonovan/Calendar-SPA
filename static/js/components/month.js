@@ -1,6 +1,3 @@
-
-import { renderEventsThisMonth } from './renderEvents.js'
-
 export function renderMonth(m) {
 
 
@@ -91,6 +88,7 @@ export function renderMonth(m) {
                 const tile = document.getElementById(firstDayOfMonth + i)
                 const date = document.createElement('div')
                 date.className = 'date-marker'
+                date.id = `date-marker-${monthObj[i].dayOfMonth}`
                 date.innerText = monthObj[i].dayOfMonth
 
                 // Highlight todays date in month
@@ -136,11 +134,44 @@ export function renderMonth(m) {
                 tile.appendChild(date)
             }
 
+        
+        // Render events in current month from database
+        axios
+            .get("http://localhost:3000/api/sessions")
+            .then((response) => {
+                const session = response.data
+                const user_id = session.user_id
+                
+                axios
+                    .get(`http://localhost:3000/api/events/${user_id}`) // <--- INSERT USER-ID FROM SESSION HERE
+                    .then((response) => {
+                        let events = response.data
+                        console.log(events)
+
+                        events.forEach((event) => {
+                            // Get date for each event
+                            const json = JSON.stringify(event.date)
+                            const dateStr = JSON.parse(json)
+                            const date = new Date(dateStr)
+                            const day = date.getDate()
+
+                            // Create event icon and append to correct day 
+                            const dayCont = document.getElementById(`date-marker-${day}`)
+                            const eventCont = document.createElement('button')
+                            eventCont.id = event.id
+                            eventCont.className = "eventCont"
+                            eventCont.innerText = event.title
+                            dayCont.append(eventCont)
+                        })
+                    })
+            })
+
+        
+
        
 }
 
-// Render events in current month from database
-renderEventsThisMonth()
+
 
 
 

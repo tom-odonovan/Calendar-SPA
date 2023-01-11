@@ -11,7 +11,8 @@ function checkLoggedIn(req, res, next) {
         next()
     }
 
-
+router.route('/')
+    .get((req, res) => {
 
         res.json({
             user_id: req.session.user_id,

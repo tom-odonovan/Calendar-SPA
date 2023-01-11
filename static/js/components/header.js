@@ -101,7 +101,6 @@ export function renderHeader(email, session, name){
     window.addEventListener('click',  (e) => {
         const modal = document.getElementById('modal-container')
         const errors = document.getElementById('errors')
-        const modal = document.getElementById('modal-container')
         if(e.target == modal){
             modal.style.display = 'none'
             errors.innerHTML = ``

@@ -141,14 +141,14 @@ h3 {
 .active {
     visibility: visible;
 }
-.dropdown-menu a {
+.dropdown-menu button {
     display: block;
     color: white;
     font-family: 'Montserrat', sans-serif;
     text-decoration: none;
     padding: 10px 40px;
 }
-.dropdown-menu a:hover {
+.dropdown-menu button:hover {
     background-color: #f9b03b;
 }
 

@@ -34,6 +34,7 @@ logInForm.addEventListener('submit', function (event){
         .post('/api/sessions', data)
         .then((response) => {
             loginErrors.innerText = "Logged in"
+            window.location.reload()
         }).catch((status) => {
             const statusCode = status.response['status']
             
@@ -43,8 +44,12 @@ logInForm.addEventListener('submit', function (event){
             if(statusCode === 401){
                 loginErrors.innerText = "Incorrect Password"
             }
+            if(statusCode === 200){
+                document.getElementById('modal-container').style.display = 'none'
+            }
             
         })
+        
 })
 
 

@@ -2,14 +2,13 @@ let today = new Date();
 
 export function renderWeek() {
   console.log(`Today's date = ${today}`);
-    // Clear the calendar container
-    const calendarContainer = document.getElementById('calendar-container')
-    calendarContainer.innerHTML = ''
-  
+  // Clear the calendar container
+  const calendarContainer = document.getElementById('calendar-container')
+  calendarContainer.innerHTML = ''
 
   // Determine the first and last days of the week to display
   const weekStart = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay() + 1);
-  const weekEnd = new Date(today.getFullYear(), today.getMonth(), today.getDate() + (6 - today.getDay()));
+  // const weekEnd = new Date(today.getFullYear(), today.getMonth(), today.getDate() + (6 - today.getDay()));
 
   // Create the week heading
   const weekHeading = createWeekHeading();
@@ -56,6 +55,13 @@ export function renderWeek() {
     dayNumber.classList.add('day-number');
     dayNumber.textContent = currentDay.getDate();
     headerCell.appendChild(dayNumber);
+
+    // by adding a condition, check if current day is today adding highlight
+    if (currentDay.toDateString() === new Date().toDateString()) {
+      //add a class to the header cell called .today
+      headerCell.classList.add('today');
+    }
+
     divHeaderRow.appendChild(headerCell);
   }
 
@@ -104,8 +110,6 @@ export function renderWeek() {
         dayCell.classList.remove('day-cell-mouse-hover');
       });
 
-
-
       hourRow.appendChild(dayCell);
 
     }
@@ -121,8 +125,6 @@ export function renderWeek() {
   const eventForm = createEventForm();
   main.appendChild(eventForm);
 }
-
-
 
 function createNavigationButtons() {
   const divNavArrows = document.createElement('div');
@@ -143,7 +145,6 @@ function createWeekBtn(btnId, btnText, targetDate) {
     renderWeek();
   });
 
-
   return btnWeek;
 }
 
@@ -155,12 +156,12 @@ function createWeekHeading() {
 
   return weekHeading;
 }
-
+//Create the event form
 function createEventForm() {
 
   let divForm = document.getElementById('event-form-id');
-
-  if(divForm) {
+  //So that it doesn't repeat...
+  if (divForm) {
     return divForm;
   }
 
@@ -170,8 +171,6 @@ function createEventForm() {
   divForm.classList.add('event-form');
   divForm.classList.add('event-form-hidden');
   divForm.setAttribute('id', "event-form-id");
-
-  // Create Submit button
 
   // Create X button
   const btnClose = document.createElement('button');
@@ -183,15 +182,72 @@ function createEventForm() {
 
   divForm.appendChild(btnClose);
 
+  // Create the New Event section
+  const divNewEvent = document.createElement('div');
+  divNewEvent.classList.add('event-form-section');
+  const h4NewEvent = document.createElement('h4');
+  h4NewEvent.className = 'h4-New-Event'
+  h4NewEvent.innerText = 'New Event';
+  divNewEvent.appendChild(h4NewEvent);
+  divForm.appendChild(divNewEvent);
+
+  // Create the Event Name section
+  const divEventName = document.createElement('div');
+  divEventName.classList.add('event-form-section');
+  const h5EventName = document.createElement('h5');
+  h5EventName.innerText = 'Event Name';
+  const textareaEventName = document.createElement('textarea');
+  textareaEventName.name = 'event name';
+  textareaEventName.placeholder = 'Enter name for the event';
+  divEventName.appendChild(h5EventName);
+  divEventName.appendChild(textareaEventName);
+  divForm.appendChild(divEventName);
+
+  // Create the Add Location section
+  const divAddLocation = document.createElement('div');
+  divAddLocation.classList.add('event-form-section');
+  const h5AddLocation = document.createElement('h5');
+  h5AddLocation.innerText = 'Location';
+  const inputLocation = document.createElement('input');
+  inputLocation.type = 'text';
+  inputLocation.name = 'location';
+  inputLocation.placeholder = 'Enter the location';
+  divAddLocation.appendChild(h5AddLocation);
+  divAddLocation.appendChild(inputLocation);
+  divForm.appendChild(divAddLocation);
+
+  // Create the Details section
+  const divDetails = document.createElement('div');
+  divDetails.classList.add('event-form-section');
+  const h5Details = document.createElement('h5');
+  h5Details.innerText = 'Details';
+  const textareaDetails = document.createElement('textarea');
+  textareaDetails.name = 'details';
+  textareaDetails.placeholder = 'Enter details of the event';
+  divDetails.appendChild(h5Details);
+  divDetails.appendChild(textareaDetails);
+  divForm.appendChild(divDetails);
+
+  // Create Submit button
+  const divSubmit = document.createElement('div');
+  divSubmit.classList.add('event-form-section');
+  divSubmit.classList.add('event-form-submit');
+  const buttonSubmit = document.createElement('button');
+  buttonSubmit.className = 'button-submit'
+  buttonSubmit.type = 'submit';
+  buttonSubmit.innerText = 'Submit';
+  divSubmit.appendChild(buttonSubmit);
+  divForm.appendChild(divSubmit);
+
   return divForm;
 }
 
 function showEventForm() {
-  const divForm = document.getElementById('event-form-id'); 
+  const divForm = document.getElementById('event-form-id');
   divForm.classList.remove('event-form-hidden');
 }
 
 function hideEventForm() {
-  const divForm = document.getElementById('event-form-id'); 
+  const divForm = document.getElementById('event-form-id');
   divForm.classList.add('event-form-hidden');
 }

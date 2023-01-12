@@ -499,7 +499,7 @@ footer.footer {
 }
 
 
-/* ---------------- EVENT CONTAINER ------------------ */
+/* ---------------- MONTH EVENT CONTAINER ------------------ */
 
 .eventCont{
     border: none;
@@ -537,5 +537,44 @@ footer.footer {
 }
 
 .eventCont:focus::before {
+    color: white;
+}
+
+/* ---------------- DAY EVENT CONTAINER ------------------ */
+
+.eventDay{
+    border: none;
+    background-color: #F5F5F5;
+    margin-left: 10px;
+    width: 130px;
+    height: 30px;
+    line-height: 20px;
+    text-align: left;
+    border-radius: 5px;
+    color: #FAA31B;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0 5px;
+    margin-bottom: 5px;
+    transition: 100ms ease-out;
+}
+.eventDay::before {
+    content: "•";
+    color: #5BC8AF;
+    font-size: 1.7em;
+    padding-right: 5px;
+    position: relative;
+    top: 3px;
+}
+.eventDay:focus {
+    opacity: 1;
+    color: white;
+    background-color: #FAA31B;
+    opacity: 0.8;    
+}
+
+.eventDay:focus::before {
     color: white;
 }

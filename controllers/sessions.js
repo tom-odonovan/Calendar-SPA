@@ -12,6 +12,7 @@ function checkLoggedIn(req, res, next) {
     }
 
 
+
 router.route('/')
     .get((req, res) => { 
         res.json({

@@ -11,15 +11,16 @@ function checkLoggedIn(req, res, next) {
         next()
     }
 
+
+
 router.route('/')
-    .get((req, res) => {
-
+    .get((req, res) => { 
         res.json({
-            user_id: req.session.user_id,
-            email: req.session.email
-        })
+                user_id: req.session.user_id,
+                email: req.session.email,
+                name: req.session.name
+            })})
 
-    })
     .post((req, res) => {
         //GET THE LOG IN DETAILS
         const { email, password_hash } = req.body

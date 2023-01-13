@@ -1,5 +1,6 @@
 
 
+
 //WHEN CURRENT DAY IS SELECTED
 export function renderCurrentDay(d) {
     //RESET THE VIEW
@@ -106,17 +107,75 @@ export function renderCurrentDay(d) {
                             const dateStr = JSON.parse(json)
                             const date = new Date(dateStr)
                             const day = date.getDate()
-                            const eventTime = event['start_time']
-                            const eventHour = eventTime.slice(0,2)
-                            console.log(todayDate, day)
+                            const eventId = event.id
+                            const eventSTime = event['start_time']
+                            const eventHour = eventSTime.slice(0,2)
+                            const eventDesc = event['description']
+                            const eventETime = parseInt(event.end_time)
+                            const startTime = parseInt(event.start_time)
+                            const eventLoc = event['locaiton']
+                            console.log(day)
+
+                            const axis = 1
 
                             if(day === todayDate){
+                                //EVENT DIV 
+                                const divSize = ((eventETime - startTime)*50 +25)
+                                console.log(divSize)
                                 const hourElement = document.getElementById(`${eventHour}`)
-                                const eventCont = document.createElement('button')
-                                eventCont.id = event.id
-                                eventCont.className = "eventDay"
-                                eventCont.innerText = event.title
+                                const eventCont = document.createElement('div')
+                                eventCont.id = `event${event.id}`
+                                eventCont.classList.add('eventDay',`${event.id}`)
+                                eventCont.innerHTML = `${event.title}`
                                 hourElement.append(eventCont)
+
+                                const specificEvent = document.getElementById(`event${event.id}`)
+                                specificEvent.style.height = `${divSize}px`
+
+                                const deleteDiv = document.createElement('div')
+                                deleteDiv.classList.add('deleteDiv')
+                                specificEvent.append(deleteDiv)
+
+                                const deleteButton = document.createElement('button')
+                                deleteButton.innerHTML = 'X'
+                                deleteButton.id = `del${event.id}`
+                                deleteButton.classList.add('del_btn')
+                                deleteDiv.append(deleteButton)
+                                
+                                
+                                
+                                //EVENT DETAILS
+                                
+                                const eventDetails = document.createElement('div')
+                                eventDetails.id = 'details'
+                                eventDetails.innerHTML=`
+                                <p>${(event.start_time).slice(0,5)} - ${(event.end_time).slice(0,5)}</p>
+                                <p>${eventDesc}</p>
+                                `
+                                
+                                console.log(eventDetails)
+                                eventCont.append(eventDetails)
+                                
+                                const delDay = new Date
+                                const deleteDate = parseInt(day - delDay.getDate())
+                                console.log(day)
+                                console.log(todayDate)
+                                console.log(deleteDate)
+                                const deleteBtn = document.getElementById(`del${event.id}`)
+                                deleteBtn.addEventListener('click', (e) =>{
+                                    
+                                    axios
+                                        .delete(`http://localhost:3000/api/events/${eventId}`)
+                                        .then((response)=>{
+                                            renderCurrentDay(deleteDate)
+                                        })
+                                    
+                                    
+                                    
+                                })
+
+
+
                                 
 
                             }
@@ -179,7 +238,7 @@ function renderDay(day, date, month, year){
 
 function renderHours(prefix){
     let time = 1
-    let hours = 12
+    let hours = 13
     while (time < 12) {
         const hour = document.createElement('div')
         hour.classList.add('hours', `${time}${prefix}`)

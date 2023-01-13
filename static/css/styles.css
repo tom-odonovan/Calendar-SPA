@@ -425,9 +425,7 @@ footer.footer {
     cursor: pointer;
 }
 
-#dayContainer{
-    
-}
+
 .monthTitle {
     margin-bottom: 30px;
     font-family: 'Jost', sans-serif;;
@@ -462,11 +460,13 @@ footer.footer {
     border-bottom: #FAA31B 1px solid;
     margin-left: 30px;
     margin-right: 30px;
-    height: 50px;
-
+    max-height: 50px;
     display: flex;
-    align-items: center;
+    flex-direction: row;
+    align-items:baseline;
+    position: relative;
 }
+
 
 .dayTitle {
     font-family: 'Jost', sans-serif;
@@ -544,37 +544,56 @@ footer.footer {
 
 .eventDay{
     border: none;
-    background-color: #F5F5F5;
-    margin-left: 10px;
-    width: 130px;
-    height: 30px;
+    /* background-color: #F5F5F5; */
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    /* height: 30px; */
+    max-width: 200px;
+    max-height: fit-content;
     line-height: 20px;
     text-align: left;
     border-radius: 5px;
-    color: #FAA31B;
+    /* color: #FAA31B; */
     font-size: 14px;
     text-overflow: ellipsis;
     overflow: hidden;
-    white-space: nowrap;
-    padding: 0 5px;
-    margin-bottom: 5px;
+    z-index: 1;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    
+    
+    
     transition: 100ms ease-out;
-}
-.eventDay::before {
-    content: "•";
-    color: #5BC8AF;
-    font-size: 1.7em;
-    padding-right: 5px;
-    position: relative;
-    top: 3px;
-}
-.eventDay:focus {
-    opacity: 1;
     color: white;
     background-color: #FAA31B;
-    opacity: 0.8;    
+    
 }
+
+
+
 
 .eventDay:focus::before {
     color: white;
 }
+
+
+#details{
+    max-width: 150px;
+    word-wrap:break-word
+    
+}
+
+.deleteDiv{
+    border-radius: 50%;
+    width: fit-content;
+    position: absolute;
+    top:0;
+    right: 0px;
+    ;
+}
+
+
+

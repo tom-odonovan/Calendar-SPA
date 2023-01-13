@@ -91,6 +91,7 @@ export function renderWeek() {
 
     // Create a cell for each day of the week
     for (let day = 0; day < 7; day++) {
+
       const dayCell = document.createElement('div');
       if (day === 6) {
         dayCell.classList.add('day-cell-last');
@@ -100,8 +101,14 @@ export function renderWeek() {
 
       let dayId = 'event-' + day + '-' + hour;
       dayCell.setAttribute('id', dayId);
+
+      let date = getFullDateByCell(day, hour);
+      dayCell.setAttribute('data-date', date);
+
+
       dayCell.addEventListener('click', () => {
         showEventForm();
+        populateForm(dayCell.getAttribute('data-date'));
       });
       dayCell.addEventListener('mouseenter', () => {
         dayCell.classList.add('day-cell-mouse-hover');
@@ -124,6 +131,46 @@ export function renderWeek() {
 
   const eventForm = createEventForm();
   main.appendChild(eventForm);
+
+  //RENDER EVENTS 
+  axios
+    .get("http://localhost:3000/api/sessions")
+    .then((response) => {
+      const session = response.data
+      const user_id = session.user_id
+
+      axios
+        .get(`http://localhost:3000/api/events/${1}`) // <--- INSERT USER-ID FROM SESSION HERE
+        .then((response) => {
+          let events = response.data
+          console.log(events)
+
+          events.forEach((event) => {
+            // Get date for each event
+            const json = JSON.stringify(event.date)
+            const dateStr = JSON.parse(json)
+            const date = new Date(dateStr)
+            const day = date.getDate()
+            const eventTime = event['start_time']
+            const eventHour = eventTime.slice(0, 2)
+            console.log(dayNumber, day)
+
+            // loop through all the days of the week
+            for (let day = 0; day < 7; day++) {
+              const currentDay = new Date(weekStart.getFullYear(), weekStart.getMonth(), weekStart.getDate() + day);
+              const dayNumber = currentDay.getDate();
+              if (day === dayNumber) {
+                const hourElement = document.getElementById(`${eventHour}`)
+                const eventCont = document.createElement('button')
+                eventCont.id = event.id
+                eventCont.className = "eventWeek"
+                eventCont.innerText = event.title
+                hourElement.append(eventCont)
+              }
+            }
+          })
+        })
+    })
 }
 
 function createNavigationButtons() {
@@ -197,11 +244,38 @@ function createEventForm() {
   const h5EventName = document.createElement('h5');
   h5EventName.innerText = 'Event Name';
   const textareaEventName = document.createElement('textarea');
+  textareaEventName.id = 'event-element';
   textareaEventName.name = 'event name';
   textareaEventName.placeholder = 'Enter name for the event';
   divEventName.appendChild(h5EventName);
   divEventName.appendChild(textareaEventName);
   divForm.appendChild(divEventName);
+
+  // Create the Date section
+  const divDate = document.createElement('div');
+  divDate.classList.add('event-form-section');
+  const h5Date = document.createElement('h5');
+  h5Date.innerText = 'Date';
+  const dateInput = document.createElement('input');
+  dateInput.id = 'date-element'
+  dateInput.type = 'date';
+  dateInput.name = 'date';
+  divDate.appendChild(h5Date);
+  divDate.appendChild(dateInput);
+  divForm.appendChild(divDate);
+
+  // Create the Start Time section
+  const divStartTime = document.createElement('div');
+  divStartTime.classList.add('event-form-section');
+  const h5StartTime = document.createElement('h5');
+  h5StartTime.innerText = 'Start Time';
+  const startTimeInput = document.createElement('input');
+  startTimeInput.id = 'start-time-element'
+  startTimeInput.type = 'time';
+  startTimeInput.name = 'start_time';
+  divStartTime.appendChild(h5StartTime);
+  divStartTime.appendChild(startTimeInput);
+  divForm.appendChild(divStartTime);
 
   // Create the Add Location section
   const divAddLocation = document.createElement('div');
@@ -209,6 +283,7 @@ function createEventForm() {
   const h5AddLocation = document.createElement('h5');
   h5AddLocation.innerText = 'Location';
   const inputLocation = document.createElement('input');
+  inputLocation.id = 'location-element'
   inputLocation.type = 'text';
   inputLocation.name = 'location';
   inputLocation.placeholder = 'Enter the location';
@@ -222,6 +297,7 @@ function createEventForm() {
   const h5Details = document.createElement('h5');
   h5Details.innerText = 'Details';
   const textareaDetails = document.createElement('textarea');
+  textareaDetails.id = 'details-element'
   textareaDetails.name = 'details';
   textareaDetails.placeholder = 'Enter details of the event';
   divDetails.appendChild(h5Details);
@@ -233,11 +309,54 @@ function createEventForm() {
   divSubmit.classList.add('event-form-section');
   divSubmit.classList.add('event-form-submit');
   const buttonSubmit = document.createElement('button');
+  buttonSubmit.id= 'submit-button-id'
   buttonSubmit.className = 'button-submit'
   buttonSubmit.type = 'submit';
   buttonSubmit.innerText = 'Submit';
+
+  
+
   divSubmit.appendChild(buttonSubmit);
   divForm.appendChild(divSubmit);
+
+  // Add the event listener to the submit button
+  // const submitButton = document.getElementById("submit-button-id")
+  buttonSubmit.addEventListener("click", (event) => {
+    // prevent page refresh
+    event.preventDefault();
+
+    axios
+        .get('/api/sessions')
+        .then((response) => {
+            let userId = response.data.user_id
+
+            const eventData = {
+              user_id: userId,
+              calendar_id: 1,
+              title: textareaEventName.value,
+              date: dateInput.value,
+              start_time: startTimeInput.value,
+              location: inputLocation.value,
+              description: textareaDetails.value
+            };
+        
+            axios
+              .post('/api/events', eventData)
+              .then((response) => {
+                console.log('---- success ----')
+                console.log(response.data)
+                hideEventForm()
+              }).catch(error => {
+                console.log('---- error ----')
+                console.log(error.response.data)
+              })
+            // console.log('---');
+            // console.log(eventData);
+            // console.log('---');
+        
+
+        });
+  });
 
   return divForm;
 }
@@ -245,9 +364,74 @@ function createEventForm() {
 function showEventForm() {
   const divForm = document.getElementById('event-form-id');
   divForm.classList.remove('event-form-hidden');
+
+  let txtAreaField = document.getElementById('event-element');
+  txtAreaField.value = "";
+
+  let inputDateField = document.getElementById('date-element');
+  inputDateField.value = "";
+
+  let startTimeField = document.getElementById('start-time-element');
+  startTimeField.value = "";
+
+  let locationField = document.getElementById('location-element');
+  locationField.value = "";
+
+  let detailsField = document.getElementById('details-element');
+  detailsField.value = "";
+
 }
 
 function hideEventForm() {
   const divForm = document.getElementById('event-form-id');
   divForm.classList.add('event-form-hidden');
+}
+
+//populates the Add event form when clicked a specified cell with the clicked date and time
+function populateForm(date) {
+  const dateObj = new Date(date);
+  //using toLocaleDateString method to get the date
+  const dateString = dateObj.toLocaleDateString();
+  console.log(dateString)
+
+  let inputDateField = document.getElementById('date-element');
+  //splits the dateString to an array gets the date and splits it to conform on the YYYY-MM-DD format
+  inputDateField.value = dateString.split('/')[2] + "-" + dateString.split('/')[1] + "-" + dateString.split('/')[0];
+
+  const newDateObj = new Date(date);
+  console.log(newDateObj.toLocaleString());
+  const timeString = newDateObj.toLocaleString();
+  let startTimeField = document.getElementById('start-time-element');
+  startTimeField.value = timeString.split(', ')[1] + "";
+
+}
+
+function getFullDateByCell(day, hour) {
+  let today = new Date();
+  const weekStart = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay() + 1);
+  const currentDay = new Date(weekStart.getFullYear(), weekStart.getMonth(), weekStart.getDate() + day);
+  currentDay.setHours(hour);
+  return currentDay;
+}
+
+function sendEventToDatabase(event) {
+  // Convert the event object to a JSON string
+  const eventJSON = JSON.stringify(event);
+
+  // Make a POST request to the server to create the new event
+  fetch('/api/events', {
+    method: 'POST',
+    body: eventJSON,
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(response => response.json())
+    .then(data => {
+      // Do something with the data returned by the server
+      console.log('Event created:', data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
 }

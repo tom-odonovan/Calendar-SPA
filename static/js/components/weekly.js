@@ -203,8 +203,9 @@ function createWeekHeading() {
 
   return weekHeading;
 }
+
 //Create the event form
-function createEventForm() {
+export function createEventForm() {
 
   let divForm = document.getElementById('event-form-id');
   //So that it doesn't repeat...
@@ -332,7 +333,7 @@ function createEventForm() {
 
             const eventData = {
               user_id: userId,
-              calendar_id: 1,
+              calendar_id: 4,
               title: textareaEventName.value,
               date: dateInput.value,
               start_time: startTimeInput.value,
@@ -361,7 +362,7 @@ function createEventForm() {
   return divForm;
 }
 
-function showEventForm() {
+export function showEventForm() {
   const divForm = document.getElementById('event-form-id');
   divForm.classList.remove('event-form-hidden');
 

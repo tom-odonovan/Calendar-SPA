@@ -370,74 +370,8 @@ export function createEventForm() {
             });
         });
 
-        buttonDelete.addEventListener("click", (event) => {
-          // prevent page refresh
-          event.preventDefault();
-
-          const eventId = event.target.getAttribute('data-event-id');
-
-          axios
-            .get('/api/sessions')
-            .then((response) => {
-
-              axios
-                .delete('/api/events/' + eventId)
-                .then((response) => {
-                  console.log('---- success ----')
-                  console.log(response.data)
-                  hideEventForm()
-                  renderWeek()
-                  renderEvents()
-                }).catch(error => {
-                  console.log('---- error ----')
-                  console.log(error.response.data)
-                })
-            });
-        });
-
         return divForm;
       }
-
-
-    axios
-        .get('/api/sessions')
-        .then((response) => {
-            let userId = response.data.user_id
-
-            const eventData = {
-              user_id: userId,
-              calendar_id: 4,
-              title: textareaEventName.value,
-              date: dateInput.value,
-              start_time: startTimeInput.value,
-              location: inputLocation.value,
-              description: textareaDetails.value
-            };
-        
-            axios
-              .post('/api/events', eventData)
-              .then((response) => {
-                console.log('---- success ----')
-                console.log(response.data)
-                hideEventForm()
-              }).catch(error => {
-                console.log('---- error ----')
-                console.log(error.response.data)
-              })
-            // console.log('---');
-            // console.log(eventData);
-            // console.log('---');
-        
-
-function showEventForm(event) {
-
-
-        const cellEvent = event.target.innerText
-        const divForm = document.getElementById('event-form-id');
-        divForm.classList.remove('event-form-hidden');
-
-        let txtAreaField = document.getElementById('event-element');
-        txtAreaField.value = "";
 
 
 export function showEventForm() {
@@ -475,7 +409,7 @@ export function showEventForm() {
 
       }
 
-function hideEventForm() {
+export function hideEventForm() {
         const divForm = document.getElementById('event-form-id');
         divForm.classList.add('event-form-hidden');
       }
@@ -526,16 +460,6 @@ function getDayFromDateString(date) {
   return theDate.getDay() - 1;
 }
 
-
-export function showEventForm() {
-  const divForm = document.getElementById('event-form-id');
-  divForm.classList.remove('event-form-hidden');
-}
-
-export function hideEventForm() {
-  const divForm = document.getElementById('event-form-id');
-  divForm.classList.add('event-form-hidden');
-}
 
 function getHourFromTimeString(time) {
 

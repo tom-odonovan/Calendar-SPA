@@ -1167,9 +1167,11 @@ footer.footer {
     vertical-align: middle;
     z-index: 4;
     transition: 0.5s;
+    text-align: center;
 }
 
 .alert-modal h4 {
+    text-align: center;
     margin: 5px;
 }
 .alert-modal div {

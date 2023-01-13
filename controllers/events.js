@@ -16,8 +16,10 @@ router.route('/')
 
     // Add new event
     .post((req, res) => {
+
         // Get input from request body
         const newEvent = req.body
+
         let { user_id, calendar_id,
             title, date,
             start_time, end_time, location, description } = newEvent
@@ -25,6 +27,7 @@ router.route('/')
         if (!title) {
             title = "New Event"
         }
+
         if (!date || !start_time ) {
             res.status(400).json({ "success": false, "message": "Missing date, or start time" })
             return;
@@ -32,15 +35,18 @@ router.route('/')
             res.status(400).json({ "success": false, "Error": "title, location or description too long" })
             return;
         }
-        // Create new event 
-        const values = [user_id, calendar_id, title, date, start_time, end_time, location, description]
 
-        const sql = 'INSERT INTO events (user_id, calendar_id, title, date, start_time, end_time, location, description) VALUES($1, $2, $3, $4, $5, $6, $7, $8);';
+        // Create new event 
+        const values = [user_id, calendar_id, title, date, start_time, location, description]
+
+        const sql = 'INSERT INTO events (user_id, calendar_id, title, date, start_time, location, description) VALUES($1, $2, $3, $4, $5, $6, $7)';
+        console.log(sql);
         db.query(sql, values).then((dbRes) => {
             res.json({ "success": true, "message": "New event added successfuly" })
         }).catch((err) => {
             res.status(500).json({ "success": false, "Error": "Database failure" })  
         }) 
+
     })
 
 
@@ -53,6 +59,7 @@ router.route('/:id')
         const sql = 'SELECT * FROM events WHERE user_id=$1 ORDER BY start_time' // <--- Ensures events are rendered in Chron. order
         db.query(sql, [id]).then((dbResult) => {
             const { rows, command, columns } = dbResult
+
             if (rows) {
                 res.json(rows)
             } else {

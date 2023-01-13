@@ -48,15 +48,18 @@ router.route('/')
             req.session.email = email
             req.session.user_id = userData[0]['id']
             req.session.name = userData[0]['name']
-            res.status(200).json({ message: "Logged in" })
-            // console.log(req.session)
+            res.status(200).json({ 
+                message: "Logged in.",
+                // user_id: req.session.user_id
+            })
+            console.log(req.session)
         })
     })
     .delete(checkLoggedIn, (req, res) => {
         req.session.destroy()
         res.json({ message: "Logged out" })
     })
-   
+ 
 
 
 module.exports = router;

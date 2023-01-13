@@ -21,4 +21,4 @@ INSERT INTO events
     VALUES (2, 12, 4, 'Physio Appointment', '1/18/2023', '12:00', '12:45', '2/2 Wattle Rd, Brookvale NSW 2100', 'Check in with Steph at the Recentre');
 
 INSERT INTO events 
-    VALUES (3, 12, 4, 'Project 3 Presentaions', '1/14/2023', '12:00', '17:00', 'Online', 'Deadline for Project 3. Meeting link: https://generalassembly.zoom.us/j/93240625082?pwd=MGFraDZKSzFFRnpxakt4emZrQ3VyQT09');
+    VALUES (4, 12, 4, 'Project 3 Presentaions', '1/14/2023', '14:00', '18:00', 'Online', 'Deadline for Project 3. Meeting link: https://generalassembly.zoom.us/j/93240625082?pwd=MGFraDZKSzFFRnpxakt4emZrQ3VyQT09');

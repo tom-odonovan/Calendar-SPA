@@ -161,6 +161,7 @@ export function renderMonth(m) {
 
                         events.forEach((event) => {
                             // Get date for each event
+
                             function parseJson(jsonStr) {
                                 const json = JSON.stringify(jsonStr)
                                 return JSON.parse(json)

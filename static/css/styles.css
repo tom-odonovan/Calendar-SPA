@@ -279,6 +279,7 @@ footer.footer {
     text-align: center;
     color: #FAA31B;
     height: 52px;
+    padding-left: 90px;
 }
 
 .div-header {
@@ -291,7 +292,8 @@ footer.footer {
 .nav-arrows {
     float: right;
     right: 45px;
-    height: 50px;
+    height: 51px;
+    margin-left: 114px;
 }
 
 .nav-arrows button {
@@ -321,40 +323,52 @@ footer.footer {
     display: flex;
     text-align: center;
     background-color: #F5F5F5;
-    margin-left: 140px;
-    margin-right: 112px;
+    margin-left: 110px;
+    margin-right: 85px;
+    border-left: 1px solid #FAA31B;
+    border-top: 1px solid #FAA31B;
+    border-right: 1px solid #FAA31B;
 }
+
+.today .day-number {
+    background-color: #FAA31B;
+    color: #F5F5F5;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 50%;
+    margin-left: 52px;
+  }
 
 .header-cell {
     flex: none;
     text-align: center;
-    font-weight: bold;
+    font-weight: 400;
     padding: 0.5em;
     font-family: 'Jost', sans-serif;
-    font-weight: 300;
-    width: 134px;
-  }
+    width: 150px;
+}
 
 .header-cell-first {
     flex: none;
-    width: 64px;
+    width: 54px;
 }
 
 .div-header-row {
     display: flex;
+    font-weight: 100;
 }
-  
+
 .day-number {
-    font-size: 0.8em;
     color: #FAA31B;
-  }
+}
 
 .hour-row {
     display: flex;
     height: 120px;
     width: auto;
     border-top: 1px solid #FAA31B;
-    margin-left: 140px;
+    margin-left: 110px;
     margin-right: 120px;
 }
 
@@ -363,7 +377,7 @@ footer.footer {
     height: 120px;
     width: auto;
     border-top: 1px solid #FAA31B;
-    margin-left: 140px;
+    margin-left: 110px;
     margin-right: 120px;
 }
 
@@ -373,7 +387,7 @@ footer.footer {
     width: auto;
     border-top: 1px solid #FAA31B;
     border-bottom: 1px solid #FAA31B;
-    margin-left: 140px;
+    margin-left: 110px;
     margin-right: 120px;
 }
 
@@ -410,9 +424,10 @@ footer.footer {
 /** --- scrollable --- */
 
 .div-weekly-scrollable {
-    margin:auto;
-    max-height: 400px; 
+    margin: auto;
+    max-height: 400px;
     overflow: auto;
+    background-color: transparent;
 }
 
 /* ---------------- DAILY ------------------ */
@@ -508,27 +523,130 @@ footer.footer {
 }
 
 
-/* This is for the pop up */
+/* This is for the POP UP */
+
 .day-cell-mouse-hover {
-    border: 2px solid #FAA31B;
+    border: 1.5px solid #FAA31B;
+    background-color: #FAA31B;
+    transform: scale(1.01);
+    box-shadow: 0 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }
 
 /* EVENT FORM */
 .event-form {
-    background-color: gray;
-    height: 400px;
+    background-color: #FAA31B;
+    border-radius: 15px;
+    height: 555px;
     width: 600px;
-
     position: absolute;
-    top: 0;
-    left: 0;
-
-    margin: auto;    
+    top: 50%;
+    left: 50%;
+    margin-top: -200px;
+    margin-left: -300px;
+    font-family: 'Jost', sans-serif;
+    padding: 30px;
 }
 
+/* Event Form Section */
+.event-form-section {
+    font-family: 'Jost', sans-serif;
+    color: #F5F5F5;
+    height: 38px;
+    margin-bottom: 10px;
+}
+
+/* Title */
+.event-form h4 {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+/* Subtitle */
+.event-form h5 {
+    margin-bottom: 5px;
+}
+
+/* Input fields */
+.event-form input[type="text"],
+.event-form input[type="date"],
+.event-form input[type="time"] {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #F5F5F5;
+    background: none;
+    font-size: 12px;
+    color: #F5F5F5;
+    margin-bottom: 10px;
+    height: min-content;
+    padding: 0px 0px;
+}
+
+/* Location field */
+.event-form input[name="location"] {
+    font-size: 12px;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #F5F5F5;
+}
+
+/* Text area */
+.event-form textarea {
+    width: 100%;
+    height: 20px;
+    border: none;
+    border-bottom: 1px solid #F5F5F5;
+    background: none;
+    color: #F5F5F5;
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+}
+
+/* Submit button */
+.event-form input[type="submit"] {
+    background-color: #FAA31B;
+    border: none;
+    color: #F5F5F5;
+    font-size: 16px;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Submit button hover */
+.event-form input[type="submit"]:hover {
+    background-color: #FAA31B;
+}
+
+/* Hidden class for form */
 .event-form-hidden {
     display:none;
 }
+
+/* Close button */
+.btn-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #F5F5F5;
+    float: right;
+}
+
+/* Submit button */
+.button-submit {
+    margin-top: 20px;
+    margin-left: 220px;
+    font-size: 20px;
+    font-family: 'Jost', sans-serif;
+    color: #FAA31B;
+    background: #F5F5F5;
+    border: none;
+    border-radius: 20px;
+    height: 40px;
+    width: 100px;
+}
+
 
 
 /* ---------------- MONTH EVENT CONTAINER ------------------ */
@@ -622,6 +740,7 @@ footer.footer {
 
 
 
+
 .deleteDiv{
     display: none;
     flex-direction: column;
@@ -677,4 +796,43 @@ footer.footer {
 @keyframes editopen{
     from{opacity: 0;}
     to{opacity: 1}
+
+/* ---------------- WEEK EVENT CONTAINER ------------------ */
+
+.eventWeek{
+    border: none;
+    background-color: #F5F5F5;
+    margin-left: 10px;
+    width: 130px;
+    height: 30px;
+    line-height: 20px;
+    text-align: left;
+    border-radius: 5px;
+    color: #FAA31B;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0 5px;
+    margin-bottom: 5px;
+    transition: 100ms ease-out;
+}
+.eventWeek::before {
+    content: "•";
+    color: #5BC8AF;
+    font-size: 1.7em;
+    padding-right: 5px;
+    position: relative;
+    top: 3px;
+}
+.eventWeek:focus {
+    opacity: 1;
+    color: white;
+    background-color: #FAA31B;
+    opacity: 0.8;    
+}
+
+.eventWeek:focus::before {
+    color: white;
+
 }

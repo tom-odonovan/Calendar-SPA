@@ -154,6 +154,7 @@ export function renderMonth(m) {
                             const dateStr = JSON.parse(json)
                             const date = new Date(dateStr)
                             const day = date.getDate()
+                            console.log(todayDate, day)
 
                             // Create event icon and append to correct day 
                             const dayCont = document.getElementById(`date-marker-${day}`)

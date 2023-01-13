@@ -491,16 +491,20 @@ footer.footer {
     margin-top: 30px;
 }
 
-/* This is for the pop up */
+/* This is for the POP UP */
 .day-cell-mouse-hover {
+    border: 1.5px solid #FAA31B;
     background-color: #FAA31B;
+    transform: scale(1.01);
+    box-shadow: 0 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }
 
 /* EVENT FORM */
 .event-form {
     background-color: #FAA31B;
     border-radius: 15px;
-    height: 525px;
+    height: 555px;
     width: 600px;
     position: absolute;
     top: 50%;
@@ -508,52 +512,64 @@ footer.footer {
     margin-top: -200px;
     margin-left: -300px;
     font-family: 'Jost', sans-serif;
-    font-size: 12px;
-    color: #F5F5F5;
     padding: 30px;
 }
 
+/* Event Form Section */
 .event-form-section {
     font-family: 'Jost', sans-serif;
-    font-size: 15px;
     color: #F5F5F5;
-    height: 64px;
+    height: 38px;
+    margin-bottom: 10px;
 }
 
-h4 {
+/* Title */
+.event-form h4 {
     font-size: 25px;
+    margin-bottom: 10px;
 }
 
-h5 {
-    height: 2px;
+/* Subtitle */
+.event-form h5 {
+    margin-bottom: 5px;
 }
 
-.event-form input[type="text"] {
+/* Input fields */
+.event-form input[type="text"],
+.event-form input[type="date"],
+.event-form input[type="time"] {
     width: 100%;
     border: none;
     border-bottom: 1px solid #F5F5F5;
-    font-size: 16px;
+    background: none;
+    font-size: 12px;
+    color: #F5F5F5;
     margin-bottom: 10px;
     height: min-content;
+    padding: 0px 0px;
 }
 
+/* Location field */
 .event-form input[name="location"] {
-    border-radius: 10px;
-    background-color: #F5F5F5;
     font-size: 12px;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #F5F5F5;
 }
 
+/* Text area */
 .event-form textarea {
     width: 100%;
-    height: 40px;
+    height: 20px;
     border: none;
-    border-radius: 10px;
-    padding: 10px;
-    margin-top: 5px;
+    border-bottom: 1px solid #F5F5F5;
+    background: none;
+    color: #F5F5F5;
     font-family: 'Jost', sans-serif;
     font-size: 12px;
 }
 
+/* Submit button */
 .event-form input[type="submit"] {
     background-color: #FAA31B;
     border: none;
@@ -565,14 +581,17 @@ h5 {
     margin: 0 auto;
 }
 
+/* Submit button hover */
 .event-form input[type="submit"]:hover {
     background-color: #FAA31B;
 }
 
+/* Hidden class for form */
 .event-form-hidden {
     display:none;
 }
 
+/* Close button */
 .btn-close {
     background: none;
     border: none;
@@ -581,8 +600,9 @@ h5 {
     float: right;
 }
 
+/* Submit button */
 .button-submit {
-    margin-top: 64px;
+    margin-top: 20px;
     margin-left: 220px;
     font-size: 20px;
     font-family: 'Jost', sans-serif;
@@ -593,6 +613,7 @@ h5 {
     height: 40px;
     width: 100px;
 }
+
 
 
 /* ---------------- MONTH EVENT CONTAINER ------------------ */
@@ -672,5 +693,44 @@ h5 {
 }
 
 .eventDay:focus::before {
+    color: white;
+}
+
+/* ---------------- WEEK EVENT CONTAINER ------------------ */
+
+.eventWeek{
+    border: none;
+    background-color: #F5F5F5;
+    margin-left: 10px;
+    width: 130px;
+    height: 30px;
+    line-height: 20px;
+    text-align: left;
+    border-radius: 5px;
+    color: #FAA31B;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0 5px;
+    margin-bottom: 5px;
+    transition: 100ms ease-out;
+}
+.eventWeek::before {
+    content: "•";
+    color: #5BC8AF;
+    font-size: 1.7em;
+    padding-right: 5px;
+    position: relative;
+    top: 3px;
+}
+.eventWeek:focus {
+    opacity: 1;
+    color: white;
+    background-color: #FAA31B;
+    opacity: 0.8;    
+}
+
+.eventWeek:focus::before {
     color: white;
 }

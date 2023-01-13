@@ -538,6 +538,17 @@ function getDayFromDateString(date) {
   return theDate.getDay() - 1;
 }
 
+
+export function showEventForm() {
+  const divForm = document.getElementById('event-form-id');
+  divForm.classList.remove('event-form-hidden');
+}
+
+export function hideEventForm() {
+  const divForm = document.getElementById('event-form-id');
+  divForm.classList.add('event-form-hidden');
+}
+
 function getHourFromTimeString(time) {
 
   return parseInt(time.split(':')[0]);
@@ -587,4 +598,5 @@ function renderEvents() {
         
       });
   });  
+
 }

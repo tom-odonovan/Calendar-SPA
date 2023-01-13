@@ -341,6 +341,7 @@ footer.footer {
     border-left: 1px solid #FAA31B;
     border-top: 1px solid #FAA31B;
     border-right: 1px solid #FAA31B;
+    width:83%;
 }
 
 .today .day-number {
@@ -350,26 +351,26 @@ footer.footer {
     height: 30px;
     line-height: 30px;
     border-radius: 50%;
-    margin-left: 52px;
+    margin: auto;
   }
 
 .header-cell {
-    flex: none;
+    flex: 1;
     text-align: center;
     font-weight: 400;
     padding: 0.5em;
     font-family: 'Jost', sans-serif;
-    width: 150px;
 }
 
 .header-cell-first {
     flex: none;
-    width: 54px;
+    width: 55px;
 }
 
 .div-header-row {
     display: flex;
     font-weight: 100;
+    width:100%;
 }
 
 .day-number {
@@ -379,29 +380,23 @@ footer.footer {
 .hour-row {
     display: flex;
     height: 120px;
-    width: auto;
+    width: 83%;
     border-top: 1px solid #FAA31B;
-    margin-left: 110px;
-    margin-right: 120px;
 }
 
 .hour-row-first {
     display: flex;
     height: 120px;
-    width: auto;
+    width: 83%;
     border-top: 1px solid #FAA31B;
-    margin-left: 110px;
-    margin-right: 120px;
 }
 
 .hour-row-last {
     display: flex;
     height: 120px;
-    width: auto;
+    width: 83%;
     border-top: 1px solid #FAA31B;
     border-bottom: 1px solid #FAA31B;
-    margin-left: 110px;
-    margin-right: 120px;
 }
 
 .hour-cell {
@@ -419,7 +414,7 @@ footer.footer {
 .day-cell {
     display: flex;
     flex: 1;
-    width: 150px;
+    width: 7em;
     height: 120px;
     border-left: 1px solid #FAA31B;
 
@@ -437,8 +432,9 @@ footer.footer {
 /** --- scrollable --- */
 
 .div-weekly-scrollable {
-    margin: auto;
+    margin: auto 85px auto 110px;
     max-height: 400px;
+    width: 100%;
     overflow: auto;
     background-color: transparent;
 }
@@ -635,6 +631,18 @@ footer.footer {
 
 /* Hidden class for form */
 .event-form-hidden {
+    display:none;
+}
+
+.button-update {
+    border:1px solid blue;
+}
+
+.button-delete {
+    border:1px solid red;
+}
+
+.button-hidden {
     display:none;
 }
 

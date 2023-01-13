@@ -16,19 +16,18 @@ router.route('/')
 
     // Add new event
     .post((req, res) => {
-        console.log('-----1--');
+
         // Get input from request body
         const newEvent = req.body
-        console.log('-----2--');
+
         let { user_id, calendar_id,
             title, date,
             start_time, end_time, location, description } = newEvent
-            console.log('-----3--');
         // Check input is valid
         if (!title) {
             title = "New Event"
         }
-        console.log('-----4--');
+
         if (!date || !start_time ) {
             res.status(400).json({ "success": false, "message": "Missing date, or start time" })
             return;
@@ -36,10 +35,10 @@ router.route('/')
             res.status(400).json({ "success": false, "Error": "title, location or description too long" })
             return;
         }
-        console.log('-----5--');
+
         // Create new event 
         const values = [user_id, calendar_id, title, date, start_time, location, description]
-        console.log('-----6--');
+
         const sql = 'INSERT INTO events (user_id, calendar_id, title, date, start_time, location, description) VALUES($1, $2, $3, $4, $5, $6, $7)';
         console.log(sql);
         db.query(sql, values).then((dbRes) => {
@@ -60,6 +59,7 @@ router.route('/:id')
         const sql = 'SELECT * FROM events WHERE user_id=$1 ORDER BY start_time' // <--- Ensures events are rendered in Chron. order
         db.query(sql, [id]).then((dbResult) => {
             const { rows, command, columns } = dbResult
+
             if (rows) {
                 res.json(rows)
             } else {

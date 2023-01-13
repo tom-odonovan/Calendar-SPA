@@ -157,7 +157,7 @@ function createWeekHeading() {
   return weekHeading;
 }
 //Create the event form
-function createEventForm() {
+export function createEventForm() {
 
   let divForm = document.getElementById('event-form-id');
   //So that it doesn't repeat...
@@ -242,12 +242,12 @@ function createEventForm() {
   return divForm;
 }
 
-function showEventForm() {
+export function showEventForm() {
   const divForm = document.getElementById('event-form-id');
   divForm.classList.remove('event-form-hidden');
 }
 
-function hideEventForm() {
+export function hideEventForm() {
   const divForm = document.getElementById('event-form-id');
   divForm.classList.add('event-form-hidden');
 }

@@ -1,3 +1,5 @@
+import { createEventForm } from "./weekly.js"
+import { showEventForm } from "./weekly.js"
 
 
 
@@ -18,6 +20,11 @@ export function renderCurrentDay(d) {
     let todayMonth = today.toLocaleDateString('default', { month: 'long' })
     let todayYear = today.getFullYear()
 
+    let titleDiv = document.createElement('h1')
+        titleDiv.className = 'monthHeading'
+        let month = today.toLocaleString('default', { month: 'long' });
+        titleDiv.innerText = `${month} ${today.getFullYear()}`
+        calendar.appendChild(titleDiv)
 
     //Generating parent flex div
 
@@ -26,10 +33,6 @@ export function renderCurrentDay(d) {
     calendar.append(dayContainer)
 
     //DAY CONTAINER CONTENTS
-    const titleDiv = document.createElement('div')
-    titleDiv.innerHTML = `<h1 class"heading">${todayMonth} ${todayYear}</h1>`
-    titleDiv.classList.add('monthTitle')
-    dayContainer.append(titleDiv)
 
     //NAV ARROWS
     let navArrows = document.createElement('div')
@@ -60,7 +63,7 @@ export function renderCurrentDay(d) {
     dayContainer.append(daySection)
 
     
-
+    
     const dayTitle = document.createElement('h3')
     dayTitle.innerText = `${todayName} ${todayDate}`
     dayTitle.classList.add('dayTitle')
@@ -93,6 +96,43 @@ export function renderCurrentDay(d) {
     midnight.innerHTML = `<p>12</p>`
     daySection.append(midnight)
 
+    const eventForm = createEventForm();
+    calendar.appendChild(eventForm);
+
+    //EVENT ADD 
+    const eventAdd = document.getElementById('dayContainer')
+    eventAdd.addEventListener('click', e => {
+        const clickedEle = e.target.id
+        if(clickedEle !== ''){
+            
+            showEventForm()
+            populateForm(today, parseInt(clickedEle))
+        }
+    })
+    function populateForm(date,time) {
+        const dateObj = new Date(date);
+        //using toLocaleDateString method to get the date
+        const dateString = dateObj.toLocaleDateString();
+        console.log(dateString)
+      
+        let inputDateField = document.getElementById('date-element');
+        //splits the dateString to an array gets the date and splits it to conform on the YYYY-MM-DD format
+        inputDateField.value = dateString.split('/')[2] + "-" + dateString.split('/')[1] + "-" + dateString.split('/')[0];
+      
+        let timeString = ``
+        const newDateObj = new Date(date);
+        if(time > 9){
+            timeString = `${time}`
+        }
+        if(time < 10){
+             timeString = `0${time}`
+        }
+        console.log(timeString)
+        let startTimeField = document.getElementById('start-time-element');
+        startTimeField.value = `${timeString}:00`
+      
+      }
+
     //RENDER EVENTS 
     axios
         .get("http://localhost:3000/api/sessions")
@@ -120,15 +160,17 @@ export function renderCurrentDay(d) {
                             const eventDesc = event['description']
                             const eventETime = parseInt(event.end_time)
                             const startTime = parseInt(event.start_time)
-                            const eventLoc = event['locaiton']
-                            console.log(day)
+                            const eventLoc = event.location
+
+                            
+                            
 
                             
 
                             if (day === todayDate) {
                                 //EVENT DIV 
-                                
-                                const divSize = ((eventETime - startTime) * 50 + 25)
+                                const divSize = ((eventETime - startTime) * 50 )
+                                const timeDiff = ((event.end_time - event.start_time))
                                 const hourElement = document.getElementById(`${eventHour}`)
                                 const eventCont = document.createElement('div')
                                 eventCont.id = `event${event.id}`
@@ -140,18 +182,27 @@ export function renderCurrentDay(d) {
                                 const specificEvent = document.getElementById(`event${event.id}`)
                                 const eventTitle = document.createElement('div')
                                 eventTitle.id = 'details'
-                                eventTitle.innerHTML = `<p><strong>${event.title}</p>`
-                                specificEvent.style.height = `${divSize}px`
-                                specificEvent.style.maxHeight = `${divSize}px`
+                                eventTitle.innerHTML = `<h4> ${event.title}</h4>`
+                                specificEvent.style.height = `50px`
                                 specificEvent.append(eventTitle)
 
                                 //EVENT DETAILS
                                 const eventDetails = document.createElement('div')
                                 eventDetails.id = 'details'
-                                eventDetails.innerHTML = `
+                                if(event.end_time){
+                                    eventDetails.innerHTML = `
                                 <p>${(event.start_time).slice(0, 5)} - ${(event.end_time).slice(0, 5)}</p>
+                                <p>${eventDesc}</p>
+                                <p>${eventLoc}</p>
                                 `
-                                console.log(eventDetails)
+                                }else{
+                                    eventDetails.innerHTML = `
+                                <p>Start Time: ${(event.start_time).slice(0, 5)}</p>
+                                <p>${eventDesc}</p>
+                                <p>${eventLoc}</p>
+                                `}
+                                
+                                
                                 eventCont.append(eventDetails)
 
 
@@ -161,12 +212,6 @@ export function renderCurrentDay(d) {
                                 const deleteDiv = document.createElement('div')
                                 deleteDiv.classList.add('deleteDiv')
                                 specificEvent.append(deleteDiv)
-
-                                const descDiv = document.createElement('div')
-                                descDiv.innerHTML = `<p>${eventDesc}</p>`
-                                descDiv.id = `desc${event.id}`
-                                // descDiv.classList.add('edit_btn')
-                                deleteDiv.append(descDiv)
 
                                 const editButton = document.createElement('button')
                                 editButton.innerHTML = 'EDIT'
@@ -182,16 +227,31 @@ export function renderCurrentDay(d) {
 
 
                                 //EVENT LISTENER TO SHOW EDIT DIV
-                                specificEvent.addEventListener('mouseenter', e => {
+                                specificEvent.addEventListener('click', e => {
                                     deleteDiv.style.display = 'flex'
-                                    specificEvent.style.minHeight = "300px"
                                 })
                                 specificEvent.addEventListener('mouseleave', e => {
+                                    
                                     deleteDiv.style.display = 'none'
-                                    specificEvent.style.minHeight = ""
+                                    specificEvent.style.height = `50px`
+                                    specificEvent.style.minHeight = "50px"
+                                    
                                 })
 
-
+                                specificEvent.addEventListener('mouseenter', e => {
+                                    console.log(event.end_time)
+                                    console.log(divSize)
+                                    if(divSize > 0){
+                                        specificEvent.style.height = `${divSize}px`
+                                        specificEvent.style.maxHeight = `${divSize}px`
+                                    }else{
+                                        specificEvent.style.minHeight = "100px"
+                                        specificEvent.style.height = "fit-content"}
+                                    
+                                    
+                                    
+                                })
+                                
 
                                 //DELETE FUNCTION
                                 const delDay = new Date
@@ -273,7 +333,7 @@ function renderHours(prefix) {
         hour.classList.add('hours', `${time}${prefix}`)
 
         if (prefix === 'am') {
-            hour.setAttribute('id', `${time}`)
+            hour.setAttribute('id', `0${time}`)
         }
         if (prefix === 'pm') {
             hour.setAttribute('id', `${hours}`)
@@ -286,3 +346,5 @@ function renderHours(prefix) {
 
     }
 }
+
+

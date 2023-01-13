@@ -269,9 +269,6 @@ function createEventForm() {
         divForm.appendChild(divDetails);
 
         // Create Submit button
-        const divSubmit = document.createElement('div');
-        divSubmit.classList.add('event-form-section');
-        divSubmit.classList.add('event-form-submit');
         const buttonSubmit = document.createElement('button');
         buttonSubmit.id = 'submit-button-id'
         buttonSubmit.className = 'button-submit'
@@ -279,9 +276,6 @@ function createEventForm() {
         buttonSubmit.innerText = 'Submit';
 
         // Create Update button
-        const divUpdate = document.createElement('div');
-        divUpdate.classList.add('event-form-section');
-        divUpdate.classList.add('event-form-update');
         const buttonUpdate = document.createElement('button');
         buttonUpdate.id = 'update-button-id'
         buttonUpdate.classList.add('button-update');
@@ -290,9 +284,6 @@ function createEventForm() {
         buttonUpdate.innerText = 'Update';
 
         // Create Delete button
-        const divDelete = document.createElement('div');
-        divDelete.classList.add('event-form-section');
-        divDelete.classList.add('event-form-delete');
         const buttonDelete = document.createElement('button');
         buttonDelete.id = 'delete-button-id'
         buttonDelete.classList.add('button-delete');
@@ -301,13 +292,10 @@ function createEventForm() {
         buttonDelete.innerText = 'Delete';        
 
 
-        divSubmit.appendChild(buttonSubmit);
-        divUpdate.appendChild(buttonUpdate);
-        divDelete.appendChild(buttonDelete);
+        divForm.appendChild(buttonSubmit);
+        divForm.appendChild(buttonUpdate);
+        divForm.appendChild(buttonDelete);
 
-        divForm.appendChild(divSubmit);
-        divForm.appendChild(divUpdate);
-        divForm.appendChild(divDelete);
 
         // Add the event listener to the submit button
         // const submitButton = document.getElementById("submit-button-id")

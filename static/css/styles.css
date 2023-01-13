@@ -621,11 +621,29 @@ footer.footer {
 }
 
 .button-update {
-    border:1px solid blue;
+    margin-top: 20px;
+    margin-left: 220px;
+    font-size: 20px;
+    font-family: 'Jost', sans-serif;
+    color: #FAA31B;
+    background: #F5F5F5;
+    border: none;
+    border-radius: 20px;
+    height: 40px;
+    width: 100px;
 }
 
 .button-delete {
-    border:1px solid red;
+    margin-top: 20px;
+    margin-left: 220px;
+    font-size: 20px;
+    font-family: 'Jost', sans-serif;
+    color: #FAA31B;
+    background: #F5F5F5;
+    border: none;
+    border-radius: 20px;
+    height: 40px;
+    width: 100px;
 }
 
 .button-hidden {

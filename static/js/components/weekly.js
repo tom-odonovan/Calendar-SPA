@@ -165,8 +165,10 @@ function createWeekHeading() {
         const month = today.toLocaleString('default', { month: 'long' });
         weekHeading.innerText = `${month} ${today.getFullYear()}`;
 
-        return weekHeading;
-      }
+
+  return weekHeading;
+}
+
 //Create the event form
 export function createEventForm() {
 
@@ -408,7 +410,39 @@ export function createEventForm() {
         return divForm;
       }
 
+
+    axios
+        .get('/api/sessions')
+        .then((response) => {
+            let userId = response.data.user_id
+
+            const eventData = {
+              user_id: userId,
+              calendar_id: 4,
+              title: textareaEventName.value,
+              date: dateInput.value,
+              start_time: startTimeInput.value,
+              location: inputLocation.value,
+              description: textareaDetails.value
+            };
+        
+            axios
+              .post('/api/events', eventData)
+              .then((response) => {
+                console.log('---- success ----')
+                console.log(response.data)
+                hideEventForm()
+              }).catch(error => {
+                console.log('---- error ----')
+                console.log(error.response.data)
+              })
+            // console.log('---');
+            // console.log(eventData);
+            // console.log('---');
+        
+
 function showEventForm(event) {
+
 
         const cellEvent = event.target.innerText
         const divForm = document.getElementById('event-form-id');
@@ -417,8 +451,14 @@ function showEventForm(event) {
         let txtAreaField = document.getElementById('event-element');
         txtAreaField.value = "";
 
+
+export function showEventForm() {
+  const divForm = document.getElementById('event-form-id');
+  divForm.classList.remove('event-form-hidden');
+
         let inputDateField = document.getElementById('date-element');
         inputDateField.value = "";
+
 
         let startTimeField = document.getElementById('start-time-element');
         startTimeField.value = "";

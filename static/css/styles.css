@@ -95,6 +95,19 @@ h3 {
     top: 10px;
 }
 
+h4{
+    font-family: 'Jost', sans-serif;
+    font-size: 20px;
+    text-align: left;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    margin-top: 10px;
+    
+    
+    
+}
+
 /* ---------------- MAIN CONTENT ------------------ */
 #content {
     position: relative;
@@ -498,7 +511,7 @@ footer.footer {
     max-height: 50px;
     display: flex;
     flex-direction: row;
-    align-items:baseline;
+    align-items: flex-start;
     position: relative;
     animation: editopen 0.8s;
 }
@@ -513,7 +526,7 @@ footer.footer {
     margin-right: 30px;
     padding-top: 30px;
     animation: editopen 0.8s;
-    position: sticky;
+    
     z-index: 950;
 }
 
@@ -541,6 +554,7 @@ footer.footer {
     margin-left: -300px;
     font-family: 'Jost', sans-serif;
     padding: 30px;
+    z-index: 999;
 }
 
 /* Event Form Section */
@@ -710,12 +724,11 @@ footer.footer {
     min-height: 50px;
     position: relative;
     /* height: 30px; */
-    width: 180px;
-    top: 10px;
+    width: fit-content;
+    top: 0px;
     
     text-align: left;
     border-radius: 5px;
-    /* color: #FAA31B; */
     font-size: 14px;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -723,26 +736,34 @@ footer.footer {
     padding-left: 15px;
     padding-right: 15px;
    
-    
-    
+    background-color: #f9b03b;
+    transition: transform 50ms ease-in;
     transition: 100ms ease-out;
     color: white;
-    background-color: #faa41bcb;
+    
     
 }
+
 
 #details{
     height: fit-content;
     width: 100%;
     margin-bottom: 0;
+    word-wrap:break-word;
+    
+
+}
+#details > p{
+    
+    border-bottom: 1px solid white;
+    max-width: 200px;
+    word-wrap: break-word;
 }
 
 
 
 
-.eventDay:focus::before {
-    color: white;
-}
+
 
 
 
@@ -751,7 +772,7 @@ footer.footer {
 .deleteDiv{
     display: none;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     gap: 10px;
     
@@ -762,7 +783,7 @@ footer.footer {
     top:0;
     right: 0px;
     transition: transform 80ms ease-in;
-    padding-bottom: 25px;
+    
 
 }
 .deleteDiv > button{
@@ -803,7 +824,7 @@ footer.footer {
 @keyframes editopen{
     from{opacity: 0;}
     to{opacity: 1}
-
+}
 /* ---------------- WEEK EVENT CONTAINER ------------------ */
 
 .eventWeek{

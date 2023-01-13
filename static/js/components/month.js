@@ -162,6 +162,7 @@ export function renderMonth(m) {
                         events.forEach((event) => {
                             // Get date for each event
 
+
                             function parseJson(jsonStr) {
                                 const json = JSON.stringify(jsonStr)
                                 return JSON.parse(json)
@@ -169,6 +170,13 @@ export function renderMonth(m) {
                             const eventId = event.id
                             const eventDate = new Date(parseJson(event.date))
                             const day = eventDate.getDate()
+
+                            const json = JSON.stringify(event.date)
+                            const dateStr = JSON.parse(json)
+                            const date = new Date(dateStr)
+                            const day = date.getDate()
+                            
+
 
                             // Create event icon and append to correct day 
                             const dayCont = document.getElementById(`date-marker-${day}`)

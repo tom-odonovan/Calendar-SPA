@@ -102,13 +102,13 @@ export function renderWeek() {
           let dayId = 'event-' + day + '-' + hour;
           dayCell.setAttribute('id', dayId);
 
-          let date = getFullDateByCell(day, hour);
+          let date = getFullDateByCell(today, day, hour);
           dayCell.setAttribute('data-date', date);
 
 
-          dayCell.addEventListener('click', () => {
-            showEventForm();
-            populateForm(dayCell.getAttribute('data-date'));
+          dayCell.addEventListener('click', (event) => {
+            showEventForm(event);
+            populateForm(dayCell.getAttribute('data-date'), event);
           });
           dayCell.addEventListener('mouseenter', () => {
             dayCell.classList.add('day-cell-mouse-hover');
@@ -153,6 +153,7 @@ function createWeekBtn(btnId, btnText, targetDate) {
           today.setDate(targetDate);
           //Render the calendar for the updated week
           renderWeek();
+          renderEvents();
         });
 
         return btnWeek;
@@ -277,10 +278,36 @@ function createEventForm() {
         buttonSubmit.type = 'submit';
         buttonSubmit.innerText = 'Submit';
 
+        // Create Update button
+        const divUpdate = document.createElement('div');
+        divUpdate.classList.add('event-form-section');
+        divUpdate.classList.add('event-form-update');
+        const buttonUpdate = document.createElement('button');
+        buttonUpdate.id = 'update-button-id'
+        buttonUpdate.classList.add('button-update');
+        buttonUpdate.classList.add('button-hidden');
+        buttonUpdate.type = 'submit';
+        buttonUpdate.innerText = 'Update';
+
+        // Create Delete button
+        const divDelete = document.createElement('div');
+        divDelete.classList.add('event-form-section');
+        divDelete.classList.add('event-form-delete');
+        const buttonDelete = document.createElement('button');
+        buttonDelete.id = 'delete-button-id'
+        buttonDelete.classList.add('button-delete');
+        buttonDelete.classList.add('button-hidden');
+        buttonDelete.type = 'submit';
+        buttonDelete.innerText = 'Delete';        
 
 
         divSubmit.appendChild(buttonSubmit);
+        divUpdate.appendChild(buttonUpdate);
+        divDelete.appendChild(buttonDelete);
+
         divForm.appendChild(divSubmit);
+        divForm.appendChild(divUpdate);
+        divForm.appendChild(divDelete);
 
         // Add the event listener to the submit button
         // const submitButton = document.getElementById("submit-button-id")
@@ -314,18 +341,76 @@ function createEventForm() {
                   console.log('---- error ----')
                   console.log(error.response.data)
                 })
-              // console.log('---');
-              // console.log(eventData);
-              // console.log('---');
+            });
+        });
 
+        buttonUpdate.addEventListener("click", (event) => {
+          // prevent page refresh
+          event.preventDefault();
 
+          const eventId = event.target.getAttribute('data-event-id');
+
+          axios
+            .get('/api/sessions')
+            .then((response) => {
+              let userId = response.data.user_id
+
+              const eventData = {
+                user_id: userId,
+                calendar_id: 1,
+                title: textareaEventName.value,
+                date: dateInput.value,
+                start_time: startTimeInput.value,
+                location: inputLocation.value,
+                description: textareaDetails.value
+              };
+
+              axios
+                .put('/api/events/' + eventId, eventData)
+                .then((response) => {
+                  console.log('---- success ----')
+                  console.log(response.data)
+                  hideEventForm()
+                  renderWeek()
+                  renderEvents()
+                }).catch(error => {
+                  console.log('---- error ----')
+                  console.log(error.response.data)
+                })
+            });
+        });
+
+        buttonDelete.addEventListener("click", (event) => {
+          // prevent page refresh
+          event.preventDefault();
+
+          const eventId = event.target.getAttribute('data-event-id');
+
+          axios
+            .get('/api/sessions')
+            .then((response) => {
+
+              axios
+                .delete('/api/events/' + eventId)
+                .then((response) => {
+                  console.log('---- success ----')
+                  console.log(response.data)
+                  hideEventForm()
+                  renderWeek()
+                  renderEvents()
+                }).catch(error => {
+                  console.log('---- error ----')
+                  console.log(error.response.data)
+                })
             });
         });
 
         return divForm;
       }
 
-function showEventForm() {
+function showEventForm(event) {
+
+        const cellEvent = event.target.innerText
         const divForm = document.getElementById('event-form-id');
         divForm.classList.remove('event-form-hidden');
 
@@ -344,6 +429,22 @@ function showEventForm() {
         let detailsField = document.getElementById('details-element');
         detailsField.value = "";
 
+        if (cellEvent === "") {
+          document.getElementById('submit-button-id').classList.remove('button-hidden');
+          document.getElementById('update-button-id').classList.add('button-hidden');
+          document.getElementById('delete-button-id').classList.add('button-hidden');
+        } else {
+          document.getElementById('submit-button-id').classList.add('button-hidden');
+          
+          const btnUpdate = document.getElementById('update-button-id');
+          btnUpdate.classList.remove('button-hidden');
+          btnUpdate.setAttribute('data-event-id', event.target.getAttribute('data-event-id'))
+
+          const btnDelete = document.getElementById('delete-button-id');
+          btnDelete.classList.remove('button-hidden');
+          btnDelete.setAttribute('data-event-id', event.target.getAttribute('data-event-id'))
+        }
+
       }
 
 function hideEventForm() {
@@ -352,7 +453,9 @@ function hideEventForm() {
       }
 
 //populates the Add event form when clicked a specified cell with the clicked date and time
-function populateForm(date) {
+function populateForm(date, event) {
+        
+        // Populate Date
         const dateObj = new Date(date);
         //using toLocaleDateString method to get the date
         const dateString = dateObj.toLocaleDateString();
@@ -361,41 +464,31 @@ function populateForm(date) {
         //splits the dateString to an array gets the date and splits it to conform on the YYYY-MM-DD format
         inputDateField.value = dateString.split('/')[2] + "-" + dateString.split('/')[1] + "-" + dateString.split('/')[0];
 
+        // Populate Time
         const newDateObj = new Date(date);
         const timeString = newDateObj.toLocaleString();
         let startTimeField = document.getElementById('start-time-element');
         startTimeField.value = timeString.split(', ')[1] + "";
 
+        // Populate Description
+        let descriptionField = document.getElementById('details-element');
+        descriptionField.value = event.target.getAttribute('data-event-description')
+        
+        // Populate Title
+        let titleField = document.getElementById('event-element');
+        titleField.value= event.target.getAttribute('data-event-title')
+        
+        // Populate Location
+        let localtionField = document.getElementById('location-element');
+        localtionField.value = event.target.getAttribute('data-event-location');
+
       }
 
-function getFullDateByCell(day, hour) {
-        let today = new Date();
+function getFullDateByCell(today, day, hour) {
         const weekStart = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay() + 1);
         const currentDay = new Date(weekStart.getFullYear(), weekStart.getMonth(), weekStart.getDate() + day);
         currentDay.setHours(hour);
         return currentDay;
-      }
-
-function sendEventToDatabase(event) {
-        // Convert the event object to a JSON string
-        const eventJSON = JSON.stringify(event);
-
-        // Make a POST request to the server to create the new event
-        fetch('/api/events', {
-          method: 'POST',
-          body: eventJSON,
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
-          .then(response => response.json())
-          .then(data => {
-            // Do something with the data returned by the server
-            console.log('Event created:', data);
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
       }
 
 function getDayFromDateString(date) {
@@ -422,19 +515,33 @@ function renderEvents() {
       .get(`http://localhost:3000/api/events/${user_id}`) // <--- INSERT USER-ID FROM SESSION HERE
       .then((response) => {
         let events = response.data;
-
         events.forEach(function(event) {
             
           let date = event.date;
           let title = event.title;
           let time = event.start_time;
 
-          let day = getDayFromDateString(date);
-          let hour = getHourFromTimeString(time);
-          const cellId = 'event-' + day + '-' + hour;
-          // const cellId = 'event-' + day + '-' + time;
-          // get the element event-{day}-{time}
-          const cell = document.getElementById(cellId).innerText = title;
+                    // Get the beginning of the week date
+          // Get the end of the week date
+
+          const firstDayOfTheWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay() + 1);
+          const lastDayOfTheWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() + (7 - today.getDay()));
+
+          if(new Date(date) >= firstDayOfTheWeek && new Date(date) <= lastDayOfTheWeek) {
+            let day = getDayFromDateString(date);
+            let hour = getHourFromTimeString(time);
+            const cellId = 'event-' + day + '-' + hour;
+            // const cellId = 'event-' + day + '-' + time;
+            // get the element event-{day}-{time}
+            
+            const cell = document.getElementById(cellId);
+            cell.setAttribute('data-event-id',event.id);
+            cell.setAttribute('data-event-title',event.title);
+            cell.setAttribute('data-event-location',event.location);
+            cell.setAttribute('data-event-description',event.description);
+            cell.innerText = title;
+          }
+
         });
         
         

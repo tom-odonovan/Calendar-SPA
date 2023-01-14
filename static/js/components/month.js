@@ -143,7 +143,16 @@ export function renderMonth(m) {
 
         // Render event form when a day is clicked
             
-            // createEventForm()
+            const dayConts = document.querySelectorAll('.day-cont')
+            dayConts.forEach((square) => {
+                square.addEventListener('click', (event) => {
+                    if (event.target.className === 'day-cont') {
+                        console.log(event.target.className)
+                        const alert = renderModal(calendar, 'Test', 'Add event form here')
+
+                    }
+                })
+            })
 
         
         // Render events in current month from database
@@ -391,10 +400,7 @@ export function renderMonth(m) {
                                                         renderMonth(0)
                                                         // Alert user
                                                         const alert = renderModal(document.body, 'Success!', 'Event updated successfully.')
-                                                        // Hide modal after 2s or on click
-                                                        setTimeout(() => {
-                                                            alert.style.opacity = '0'
-                                                        }, 1000);
+                                                        // Hide modal on click away
                                                         window.addEventListener('click', (event) => {
                                                             alert.remove()
                                                         })
@@ -515,6 +521,16 @@ function renderModal(parentNode, alert, message) {
     const text = document.createElement('div')
     text.innerHTML = message
     modal.appendChild(text)
+
+    // Hide modal after 2s
+    setTimeout(() => {
+        // Fade-out
+        modal.style.opacity = '0'
+    }, 1000);
+    setTimeout(() => {
+        // Remove
+        modal.style.display = 'none'
+    }, 1000);
 
     return modal;
 }

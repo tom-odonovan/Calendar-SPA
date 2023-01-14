@@ -21,10 +21,10 @@ export function renderCurrentDay(d) {
     let todayYear = today.getFullYear()
 
     let titleDiv = document.createElement('h1')
-        titleDiv.className = 'monthHeading'
-        let month = today.toLocaleString('default', { month: 'long' });
-        titleDiv.innerText = `${month} ${today.getFullYear()}`
-        calendar.appendChild(titleDiv)
+    titleDiv.className = 'monthHeading'
+    let month = today.toLocaleString('default', { month: 'long' });
+    titleDiv.innerText = `${month} ${today.getFullYear()}`
+    calendar.appendChild(titleDiv)
 
     //Generating parent flex div
 
@@ -62,15 +62,15 @@ export function renderCurrentDay(d) {
     daySection.setAttribute('id', 'daySection')
     dayContainer.append(daySection)
 
-    
-    
+
+
     const dayTitle = document.createElement('h3')
     dayTitle.innerText = `${todayName} ${todayDate}`
     dayTitle.classList.add('dayTitle')
     dayTitle.id = 'dayTitle'
     daySection.append(dayTitle)
 
-    
+
 
 
     //AM START
@@ -103,35 +103,38 @@ export function renderCurrentDay(d) {
     const eventAdd = document.getElementById('dayContainer')
     eventAdd.addEventListener('click', e => {
         const clickedEle = e.target.id
-        if(clickedEle !== ''){
-            
+        if (clickedEle !== '') {
+
+            showEventForm(e.target.innerHTML)
+            populateForm(today, parseInt(clickedEle))
+        } else {
             showEventForm()
             populateForm(today, parseInt(clickedEle))
         }
     })
-    function populateForm(date,time) {
+    function populateForm(date, time) {
         const dateObj = new Date(date);
         //using toLocaleDateString method to get the date
         const dateString = dateObj.toLocaleDateString();
         console.log(dateString)
-      
+
         let inputDateField = document.getElementById('date-element');
         //splits the dateString to an array gets the date and splits it to conform on the YYYY-MM-DD format
         inputDateField.value = dateString.split('/')[2] + "-" + dateString.split('/')[1] + "-" + dateString.split('/')[0];
-      
+
         let timeString = ``
         const newDateObj = new Date(date);
-        if(time > 9){
+        if (time > 9) {
             timeString = `${time}`
         }
-        if(time < 10){
-             timeString = `0${time}`
+        if (time < 10) {
+            timeString = `0${time}`
         }
         console.log(timeString)
         let startTimeField = document.getElementById('start-time-element');
         startTimeField.value = `${timeString}:00`
-      
-      }
+
+    }
 
     //RENDER EVENTS 
     axios
@@ -140,7 +143,7 @@ export function renderCurrentDay(d) {
             const session = response.data
             const user_id = session.user_id
 
-            if(session) {
+            if (session) {
                 axios
                     .get(`http://localhost:3000/api/events/${user_id}`) // <--- INSERT USER-ID FROM SESSION HERE
                     .then((response) => {
@@ -162,22 +165,25 @@ export function renderCurrentDay(d) {
                             const startTime = parseInt(event.start_time)
                             const eventLoc = event.location
 
-                            
-                            
+                            console.log(eventHour)
 
-                            
+
+
+
+
 
                             if (day === todayDate) {
                                 //EVENT DIV 
-                                const divSize = ((eventETime - startTime) * 50 )
+                                const divSize = ((eventETime - startTime) * 50)
                                 const timeDiff = ((event.end_time - event.start_time))
-                                const hourElement = document.getElementById(`${eventHour}`)
+                                const hourElement = document.getElementById(eventHour.toString())
+                                console.log(eventHour)
                                 const eventCont = document.createElement('div')
                                 eventCont.id = `event${event.id}`
                                 eventCont.classList.add('eventDay', `${event.id}`)
                                 hourElement.append(eventCont)
 
-                                
+
 
                                 const specificEvent = document.getElementById(`event${event.id}`)
                                 const eventTitle = document.createElement('div')
@@ -189,20 +195,20 @@ export function renderCurrentDay(d) {
                                 //EVENT DETAILS
                                 const eventDetails = document.createElement('div')
                                 eventDetails.id = 'details'
-                                if(event.end_time){
+                                if (event.end_time) {
                                     eventDetails.innerHTML = `
                                 <p>${(event.start_time).slice(0, 5)} - ${(event.end_time).slice(0, 5)}</p>
                                 <p>${eventDesc}</p>
                                 <p>${eventLoc}</p>
                                 `
-                                }else{
+                                } else {
                                     eventDetails.innerHTML = `
                                 <p>Start Time: ${(event.start_time).slice(0, 5)}</p>
                                 <p>${eventDesc}</p>
                                 <p>${eventLoc}</p>
                                 `}
-                                
-                                
+
+
                                 eventCont.append(eventDetails)
 
 
@@ -231,27 +237,28 @@ export function renderCurrentDay(d) {
                                     deleteDiv.style.display = 'flex'
                                 })
                                 specificEvent.addEventListener('mouseleave', e => {
-                                    
+
                                     deleteDiv.style.display = 'none'
                                     specificEvent.style.height = `50px`
                                     specificEvent.style.minHeight = "50px"
-                                    
+
                                 })
 
                                 specificEvent.addEventListener('mouseenter', e => {
                                     console.log(event.end_time)
                                     console.log(divSize)
-                                    if(divSize > 0){
+                                    if (divSize > 0) {
                                         specificEvent.style.height = `${divSize}px`
                                         specificEvent.style.maxHeight = `${divSize}px`
-                                    }else{
+                                    } else {
                                         specificEvent.style.minHeight = "100px"
-                                        specificEvent.style.height = "fit-content"}
-                                    
-                                    
-                                    
+                                        specificEvent.style.height = "fit-content"
+                                    }
+
+
+
                                 })
-                                
+
 
                                 //DELETE FUNCTION
                                 const delDay = new Date
@@ -333,7 +340,12 @@ function renderHours(prefix) {
         hour.classList.add('hours', `${time}${prefix}`)
 
         if (prefix === 'am') {
-            hour.setAttribute('id', `0${time}`)
+            if(time >= 10) {
+                hour.setAttribute('id', `${time}`)
+            } else {
+                hour.setAttribute('id', `0${time}`)
+            }
+            
         }
         if (prefix === 'pm') {
             hour.setAttribute('id', `${hours}`)
@@ -346,5 +358,3 @@ function renderHours(prefix) {
 
     }
 }
-
-

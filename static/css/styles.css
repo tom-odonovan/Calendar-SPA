@@ -1152,6 +1152,7 @@ footer.footer {
 /* ---------------- ALERT MODAL ------------------ */
 
 .alert-modal {
+    opacity: 1;
     position: fixed;
     left: 50%;
     top: 45%;

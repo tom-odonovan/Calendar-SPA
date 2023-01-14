@@ -108,8 +108,8 @@ export function renderCurrentDay(d) {
             showEventForm(e.target.innerHTML)
             populateForm(today, parseInt(clickedEle))
         } else {
-            showEventForm()
-            populateForm(today, parseInt(clickedEle))
+            // showEventForm()
+            // populateForm(today, parseInt(clickedEle))
         }
     })
     function populateForm(date, time) {

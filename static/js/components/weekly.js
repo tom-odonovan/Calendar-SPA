@@ -371,6 +371,31 @@ export function createEventForm() {
       });
   });
 
+  buttonDelete.addEventListener("click", (event) => {
+    // prevent page refresh
+    event.preventDefault();
+
+    const eventId = event.target.getAttribute('data-event-id');
+
+    axios
+      .get('/api/sessions')
+      .then((response) => {
+
+        axios
+          .delete('/api/events/' + eventId)
+          .then((response) => {
+            console.log('---- success ----')
+            console.log(response.data)
+            hideEventForm()
+            renderWeek()
+            renderEvents()
+          }).catch(error => {
+            console.log('---- error ----')
+            console.log(error.response.data)
+          })
+      });
+  });
+
   return divForm;
 }
 

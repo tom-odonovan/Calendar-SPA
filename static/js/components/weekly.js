@@ -107,7 +107,8 @@ export function renderWeek() {
 
 
       dayCell.addEventListener('click', (event) => {
-        showEventForm(event);
+        console.log(event.target.innerHTML)
+        showEventForm(event.target.innerHTML);
         populateForm(dayCell.getAttribute('data-date'), event);
       });
       dayCell.addEventListener('mouseenter', () => {
@@ -391,7 +392,7 @@ export function showEventForm(cellEvent) {
   let detailsField = document.getElementById('details-element');
   detailsField.value = "";
 
-  if (cellEvent === "") {
+  if (cellEvent === "" ) {
     document.getElementById('submit-button-id').classList.remove('button-hidden');
     document.getElementById('update-button-id').classList.add('button-hidden');
     document.getElementById('delete-button-id').classList.add('button-hidden');

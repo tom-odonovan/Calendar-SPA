@@ -80,13 +80,14 @@ h2 {
     
 }
 #home_page {
-    margin: 200px auto;
+    margin: 100px auto 200px auto;
 }
+
 img.home_image {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    height: 300px;
+    height: 25%;
 }
 h3 {
     text-align: center;
@@ -169,12 +170,13 @@ h4{
     padding: 20px 0;
     border-radius: 15px;
     background-color: #FAA31B;
+    transition: 1s ease-out;
 }
 .hidden {
-    visibility: hidden;
+    display: none;
 }
 .active {
-    visibility: visible;
+    display: block;
 }
 .dropdown-menu a {
     display: block;
@@ -723,14 +725,14 @@ footer.footer {
     position: relative;
     top: 3px;
 }
-.eventCont:focus {
+.event-focus {
     opacity: 1;
     color: white;
     background-color: #FAA31B;
     opacity: 0.8;    
 }
 
-.eventCont:focus::before {
+.event-focus:before {
     color: white;
 }
 
@@ -966,7 +968,7 @@ footer.footer {
     float: right;
     position: relative;
     left: -10px;
-    top: -45px;
+    top: 11px;
     opacity: 0.6;
 }
 
@@ -1024,8 +1026,8 @@ footer.footer {
     font-family: 'Montserrat', sans-serif;
     text-align: center;
     position: relative;
-    left: 68px;
-    top: -65px;
+    left: -10px;
+    top: -10px;
     opacity: 0.6;
 }
 
@@ -1077,12 +1079,12 @@ footer.footer {
 
 /* ---------------- UPDATE EVENT FORM ------------------ */
 
-.update-form {
+.month-event-form {
     height: 600px;
     padding-bottom: 50px;
 }
 
-.update-form h2 {
+.month-event-form h2 {
     font-family: 'Jost', sans-serif;
     color: white;
     font-size: 20px;
@@ -1092,8 +1094,8 @@ footer.footer {
     border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-.update-form input,
-.update-form textarea {
+.month-event-form input,
+.month-event-form textarea {
     width: 280px;
     border-radius: 5px;
     color: #727272;
@@ -1102,34 +1104,34 @@ footer.footer {
     border: 0;
 }
 
-.update-form label {
+.month-event-form label {
     display: block;
     padding-left: 35px;
     text-align: left;
     color: white;
 }
 
-.update-form .time-input {
+.month-event-form .time-input {
     margin-top: 25px;
     width: 180px;
 }
 
-.update-form .time-label {
+.month-event-form .time-label {
     display: inline-block;
     text-align: center;
     width: 100px;
     padding-right: 20px;
 }
 
-.update-form .event-desc {
+.month-event-form .event-desc {
     padding: 10px 15px;
     margin-top: 10px;
     border-top: 10px solid #F5F5F5;
     border-bottom: 10px solid #F5F5F5;
 }
 
-.update-form button,
-.update-form .cancel-btn {
+.month-event-form button,
+.month-event-form .cancel-btn {
     display: inline-block;
     border-radius: 10px;
 	border: 1px solid #FFFFFF;
@@ -1143,7 +1145,7 @@ footer.footer {
     margin: 30px 5px 0 5px;
 }
 
-.update-form button:hover,
+.month-event-form button:hover,
 .cancel-btn:hover {
     cursor: pointer;
     background-color: #f7b03e;

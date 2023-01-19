@@ -43,7 +43,7 @@ An event list, displaying the events for the selected date range.
 
 ### Figma:
 
-In the early stages of development we used Figma to draw up a series of designs/layouts which ensured we had a cohesive and uniform design. Peach with her background in graphic design was instrumental in guiding design decesions from start to finish.
+In the early stages of development we used Figma to draw up a series of designs/layouts which ensured we had a consistent and uniform design. Peach with her background in graphic design was instrumental in guiding design decesions from start to finish.
 
 Have a look -> [Figma Wireframes](https://www.figma.com/proto/VlU8Lfz12JcDVSlvU8nmqA/Untitled?page-id=0%3A1&node-id=4%3A317&viewport=255%2C170%2C0.14&scaling=scale-down&starting-point-node-id=1%3A85&show-proto-sidebar=1)
 

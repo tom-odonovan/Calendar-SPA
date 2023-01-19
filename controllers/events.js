@@ -23,6 +23,7 @@ router.route('/')
         let { user_id, calendar_id,
             title, date,
             start_time, end_time, location, description } = newEvent
+        console.log(newEvent);
         // Check input is valid
         if (!title) {
             title = "New Event"
